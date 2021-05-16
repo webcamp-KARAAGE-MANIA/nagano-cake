@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <h2>商品編集</h2>
+    <div class="product-form">
+      <%= form_with model: @products, local:true do |f| %>
+        <%= f.label :image, '商品画像' %>
+        <%= f.attachment_field :image %>
+        <%= f.label :name, '商品名' %>
+        <%= f.text_field :name, prompt: "商品名" %>
+        <%= f.label :introduction, '商品説明' %>
+        <%= f.text_area :introduction, prompt: "ここに説明文を記述します" %>
+        <%= f.label :genre_id, 'ジャンル' %>
+        <!--ジャンルのデータベースから値持ってくる-->
+        <%= f.select :genre_id, {'ケーキ': 1, 'クッキー': 2}, {include_blank: '選択してください'}%>
+        <%= f.label :price, '税抜価格' %>
+        <%= f.label :is_active, '販売ステータス' %>
+        <%= f.radio_button :is_active, true %>
+        <%= f.label :is_active, '販売中', value:true %>
+        <%= f.radio_button :is_active, false %>
+        <%= f.label :is_active, '販売停止中', value:false %>
+        <%= f.submit '新規登録', class:'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>
