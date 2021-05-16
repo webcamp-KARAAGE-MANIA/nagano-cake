@@ -1,2 +1,66 @@
-<h1>Admin::Orders#show</h1>
-<p>Find me in app/views/admin/orders/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 bg-light text-center">注文履歴詳細</div>
+  </div>
+  <div class="row">
+    <div class="col-md-12 text-left">
+      <table>
+        <tr>
+          <th>購入者</th>
+          <td><%= link_to @order.name, admins_customer_path(@order.id) %></td>
+        </tr>
+        <tr>
+          <th><注文日/th>
+          <td><%= @order.created_at %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td rowspan="2">〒<%= @order.postal_code %> <%=@order.shipping_address %><br>
+            <div class="text-left"><%= @order.name%></div>
+
+          </td>
+        </tr>
+        <tr>
+          <th>支払い方法</th>
+          <td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+          <td><%= @order.order_status %>
+            <%= form_with model:@order, url:admin_order_path, local:true do |f| %>
+            <%= f.select :order_status, Order.order_status.keys, class: "order_status_select" %>
+            <%= f.submit "更新", class:"btn btn-success" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-mt-8 text-left"></div>
+      <table class="table table-stripped">
+        <thead>
+          <tr class="order-info">
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order.orders each do |order| %>
+          <tr>
+            <td><%= order.product.name %></td>
+            <td><%= order.product.price %></td>
+            <td><%= order.order_details.quantity %></td>
+            <td><%= order.order_details.total_amount %></td>
+            <td><%= order.order_details.order_status %></td>
+            <td><%= %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+  </div>
+</div>
+
