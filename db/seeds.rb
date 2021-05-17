@@ -94,14 +94,6 @@ Product.create!(
     image: File.open("./app/assets/images/can.jpg")
   )
 
-# 9.times do |n|
-#   ShippingAddress.create!(
-#     name: "test#{n + 1}",
-#     postal_code: "123456#{n + 1}",
-#     address: "東京都渋谷区神南1丁目19-11 パークウェースクエア2 4階#{n + 1}",
-#     customer_id: n + 1
-#   )
-# end
 
 # 9.times do |n|
 #   ShippingAddress.create!(
@@ -111,7 +103,6 @@ Product.create!(
 #     customer_id: n + 1
 #   )
 # end
-
 
 5.times do |n|
   Order.create!(

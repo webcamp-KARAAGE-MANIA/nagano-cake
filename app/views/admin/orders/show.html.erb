@@ -1,23 +1,23 @@
 <div class="container">
+  <% if @order.present? %>
   <div class="row">
-    <div class="col-md-4 bg-light text-center">注文履歴詳細</div>
+    <div class="col-md-4 text-center"><h4>注文履歴詳細</h4></div>
   </div>
   <div class="row">
-    <div class="col-md-12 text-left">
+    <div class="col-md-12 text-left w-auto mx-auto">
       <table>
         <tr>
           <th>購入者</th>
-          <td><%= link_to "購入者名@order.name", admin_customer_path(@order.id) %></td>
+          <td><%= link_to @order.customer.name, admin_customer_path(@order.id) %></td>
         </tr>
         <tr>
           <th>注文日</th>
-          <td><%= @order.created_at.to_s(:datetime_jp) %></td>
+          <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
         </tr>
         <tr>
           <th>配送先</th>
-          <td rowspan="2">〒<%= @order.postal_code %> <%=@order.shipping_address %><br>
-            <div class="text-left"><%= "購入者名@order.name" %></div>
-
+          <td>〒<%= @order.postal_code %> <%=@order.shipping_address %><br>
+            <div class="text-left"><%= @order.customer.name %></div>
           </td>
         </tr>
         <tr>
@@ -26,10 +26,11 @@
         </tr>
         <tr>
           <th>注文ステータス</th>
-          <td><%= @order.order_status_i18n %>
+          <td>
             <%= form_with model:@order, url:admin_order_path, method: :patch, local:true do |f| %>
-            <%= f.select :order_status, Order.order_statuses.keys, :selected=>Order.order_statuses[@order.order_status], class: "order_status_select" %>
-            <%= f.submit "更新", class:"btn btn-success" %>
+            <%#= f.select :order_status, options_for_select(Order.order_statuses.keys, selected: @order.order_status), class: "order_status_select" %>
+            <%= f.select :order_status, Order.order_statuses.keys.to_a %>
+            <%= f.submit "更新", class:"btn btn-success btn-sm" %>
             <% end %>
           </td>
         </tr>
@@ -52,12 +53,13 @@
           <% @order_details.each do |order_detail| %>
           <tr>
             <td><%= order_detail.product.name %></td>
-            <td><%= order_detail.product.price %></td>
-            <td><%= order_details.quantity %></td>
-            <td><%= "小計をだすorder_details.total_amount" %></td>
-            <td><%= form_with model:@order, url:admin_order_details_path(order), method: :patch, local:true do |f|%>
-                <%= f.select :product_status_i18n, OrderDetail.product_status.keys, :selected=>OrderDetail.product_status[order.product_status], class: "order_status" %>
-                <%= f.submit "更新", class:"btn btn-success" %>
+            <td><%= (order_detail.product.price*1.1).floor.to_s(:delimited) %></td>
+            <td><%= order_detail.quantity %></td>
+            <td><%= (order_detail.product.price*order_detail.quantity*1.1).floor.to_s(:delimited) %></td>
+            <td><%= form_with model:order_detail, url:admin_order_detail_path(order_detail), method: :patch, local:true do |f|%>
+                <%#= f.select :product_status_i18n, OrderDetail.product_statuses.keys, :selected=>OrderDetail.product_statuses[order_detail.product_status], class: "order_status" %>
+                <%= f.select :product_status, OrderDetail.product_statuses.keys.to_a %>
+                <%= f.submit "更新", class:"btn btn-success btn-sm" %>
                 <% end %>
             </td>
             <td><%= %></td>
@@ -70,21 +72,28 @@
       <div class="float-right">
         <table>
           <tr>
-            <th>商品合計</th>
-            <td><%= (@order.total_amount*1.1)%>円</td>
+            <th width="120">商品合計</th>
+            <td align="right"><%= (@order.total_amount*1.1).floor.to_s(:delimited)%>円</td>
           </tr>
           <tr>
-            <th>送料</th>
-            <td><%= @order.shipping_fee %>円</td>
+            <th width="120">送料</th>
+            <td align="right"><%= (@order.shipping_fee).floor.to_s(:delimited) %>円</td>
           </tr>
           <tr>
-            <th>請求金額</th>
-            <td><%= @order.total_amount*1.1 + @order.shipping_fee%>円</td>
+            <th width="120">請求金額合計</th>
+            <td align="right"><%= (@order.total_amount*1.1 + @order.shipping_fee).floor.to_s(:delimited)%>円</td>
           </tr>
         </table>
       </div>
     </div>
-
   </div>
+  <% if customer_signed_in? %>
+      <%= link_to "注文履歴一覧へ戻る", customers_orders_path, class: "btn btn-info btn-lg order-index-back btn-sm" %>
+    <% else %>
+      <%= link_to "会員詳細へ戻る", admin_customer_path, class: "btn btn-info order-index-back btn-sm" %>
+    <% end %>
+  <% else %>
+    <p>注文履歴がありません。</p>
+  <% end %>
 </div>
 

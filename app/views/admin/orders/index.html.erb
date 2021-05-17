@@ -1,6 +1,6 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-4 bg-light text-center">注文履歴一覧</div>
+    <div class="col-md-4 text-center"><h4>注文履歴一覧</h4></div>
   </div>
 
   <div class="row">
@@ -17,8 +17,8 @@
         <tbody>
           <% @orders.each do |order| %>
           <tr>
-            <td><% link_to order.created_at, admin_orders_path(order.id) %></td>
-            <td><%#= order.product.name %></td>
+            <td><%= link_to order.created_at.to_s(:datetime_jp), admin_order_path(order) %></td>
+            <td><%= order.customer.name %></td>
             <td><%= order.order_details.count %></td>
             <td><%= order.order_status %></td>
           </tr>
@@ -27,6 +27,6 @@
       </table>
     </div>
   </div>
-  <!--<div class="text-center"><%#= paginate(@orders) %></div>-->
+  <div class="text-center"><%= paginate(@orders) %></div>
 </div>
 
