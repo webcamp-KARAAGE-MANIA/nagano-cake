@@ -17,11 +17,11 @@ class Customer < ApplicationRecord
             presence: true
 
   def full_name
-    self.surename + " " + self.name
+    self.surname + " " + self.name
   end
 
   def full_name_kana
-    self.surename_kana + " " + self.name_kana
+    self.surname_kana + " " + self.name_kana
   end
 
 end
