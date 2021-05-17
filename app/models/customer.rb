@@ -13,6 +13,7 @@ class Customer < ApplicationRecord
             :phone_number,
             :email,
             :encrypted_password,
+
             presence: true
 
   def full_name
