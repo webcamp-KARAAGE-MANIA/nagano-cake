@@ -91,6 +91,19 @@ Product.create!(
     price: "1000",
     genre_id: 5,
     is_active: [['販売中', true], ['販売停止', false]],
+
+    image_id: open("./app/assets/images/can.jpeg")
+  )
+
+9.times do |n|
+  ShippingAddress.create!(
+    name: "test#{n + 1}",
+    postal_code: "123456#{n + 1}",
+    address: "東京都渋谷区神南1丁目19-11 パークウェースクエア2 4階#{n + 1}",
+    customer_id: n + 1
+  )
+end
+
     image_id: open("./app/assets/images/can.jpg")
   )
 
@@ -103,11 +116,15 @@ Product.create!(
 #   )
 # end
 
+
 5.times do |n|
   Order.create!(
     customer_id: n + 1,
     shipping_address: "東京都渋谷区神南1丁目19-11 パークウェースクエア2 4階#{n + 1}",
     postal_code: "123456#{n + 1}",
+
+    name: "test#{n + 1}",
+
     shipping_fee: "800",
     total_amount: "#{1000 + (n * 1000) +800}",
     payment_method: "クレジットカード"
