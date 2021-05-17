@@ -13,7 +13,13 @@ class Admin::CustomersController < ApplicationController
   end
 
   def updated
-
+    customer = Customer.find(params[:id])
+    if
+      customer.update(genre_params)
+      redirect_to admin_customers_path
+    else
+      render 'edit'
+    end
   end
 
   def hide
