@@ -104,9 +104,6 @@ Product.create!(
   )
 end
 
-    image_id: open("./app/assets/images/can.jpg")
-  )
-
 # 9.times do |n|
 #   ShippingAddress.create!(
 #     name: "test#{n + 1}",
