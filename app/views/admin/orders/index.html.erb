@@ -18,7 +18,7 @@
           <% @orders.each do |order| %>
           <tr>
             <td><% link_to order.created_at, admin_orders_path(order.id) %></td>
-            <td><%= order.name %></td>
+            <td><%#= order.product.name %></td>
             <td><%= order.order_details.count %></td>
             <td><%= order.order_status %></td>
           </tr>
