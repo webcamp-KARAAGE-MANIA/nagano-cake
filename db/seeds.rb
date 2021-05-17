@@ -10,6 +10,7 @@ Admin.create!(
   email: "aaa@aaa",
   password: "aaaaaa")
 
+
 10.times do |n|
     Customer.create!(
       email: "test#{n + 1}@test.com",
@@ -121,3 +122,4 @@ end
     quantity: n + 3,
   )
 end
+
