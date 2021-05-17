@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-8">
+    <span class="bg-secondary"><%= @customer.full_name %>さんの会員情報</span>
+    <table class='table table-hover table-inverse'>
+      <tbody>
+        <tr>
+          <td>会員ID</td>
+          <td><%= @customer.id %></td>
+        </tr>
+        <tr>
+          <td>氏名</td>
+          <td><%= @customer.full_name %></td>
+        </tr>
+        <tr>
+          <td>フリガナ</td>
+          <td><%= @customer.full_name_kana %></td>
+        </tr>
+        <tr>
+          <td>郵便番号</td>
+          <td><%= @customer.address %></td>
+        </tr>
+        <tr>
+          <td>住所</td>
+          <td><%= @customer.postal_code %></td>
+        </tr>
+        <tr>
+          <td>電話番号</td>
+          <td><%= @customer.phone_number %></td>
+        </tr>
+        <tr>
+          <td>メールアドレス</td>
+          <td><%= @customer.email %></td>
+        </tr>
+        <tr>
+          <td>ユーザーステータス</td>
+          <td><%= @customer.is_delete %></td>
+        </tr>
+        <tr>
+          <td></td>
+          <td><%= link_to "編集", edit_admin_customer_path(@customer.id), class: 'btn btn-success' %></td>
+          <td><%= link_to "注文一覧に戻る", admin_orders_path, class: 'btn btn-primary' %></td>
+        </tr>
+      </tbody>
+    </div>
+  </div>
+</div>

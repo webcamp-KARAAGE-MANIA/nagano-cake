@@ -1,6 +1,6 @@
 <div class="container mt-3">
   <div class="row">
-    <div class='col-md-3 '>
+    <div class='col-md-6 '>
       <h2>ジャンル一覧</h2>
 
       <p>ジャンル名</p>
@@ -21,6 +21,7 @@
           <tr>
           <td><%= genre.name %></td>
           <td><%= link_to "編集", edit_admin_genre_path(genre.id), class: 'btn btn-success' %></td>
+          <td><%= link_to "削除", admin_genre_path(genre.id),method: :delete ,class: 'btn btn-danger'%></td>
           </tr>
           <% end %>
         </tbody>
