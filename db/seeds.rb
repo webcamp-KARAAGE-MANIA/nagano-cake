@@ -104,9 +104,6 @@ Product.create!(
   )
 end
 
-    image_id: open("./app/assets/images/can.jpg")
-  )
-
 # 9.times do |n|
 #   ShippingAddress.create!(
 #     name: "test#{n + 1}",
@@ -128,6 +125,7 @@ end
     shipping_fee: "800",
     total_amount: "#{1000 + (n * 1000) +800}",
     payment_method: "クレジットカード"
+
   )
 end
 
