@@ -111,6 +111,7 @@ end
     shipping_fee: "800",
     total_amount: "#{1000 + (n * 1000) +800}",
     payment_method: "クレジットカード"
+
   )
 end
 
