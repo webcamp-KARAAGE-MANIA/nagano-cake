@@ -1,0 +1,15 @@
+ja:
+  enums:
+    order:
+      order_status:
+        0: 入金待ち
+        1: 入金確認
+        2: 制作中
+        3: 発送準備中
+        4: 発送済み
+    order_details:
+      products_status:
+        0: 着手不可
+        1: 制作待ち
+        2: 制作中
+        3: 制作完了

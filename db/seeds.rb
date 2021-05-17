@@ -62,7 +62,7 @@ Product.create!(
     introduction: "ホールのチョコケーキにたくさんのベリーをのせました",
     price: "2800",
     genre_id: 2,
-    is_is_active: [['販売中', true], ['販売停止', false]],
+    is_active: [['販売中', true], ['販売停止', false]],
     image_id: open("./app/assets/images/choco-cake.jpeg")
   )
 

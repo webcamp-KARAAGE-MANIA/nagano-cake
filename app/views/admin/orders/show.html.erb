@@ -7,16 +7,16 @@
       <table>
         <tr>
           <th>購入者</th>
-          <td><%= link_to @order.name, admins_customer_path(@order.id) %></td>
+          <td><%= link_to "購入者名@order.name", admin_customer_path(@order.id) %></td>
         </tr>
         <tr>
-          <th><注文日/th>
-          <td><%= @order.created_at %></td>
+          <th>注文日</th>
+          <td><%= @order.created_at.to_s(:datetime_jp) %></td>
         </tr>
         <tr>
           <th>配送先</th>
           <td rowspan="2">〒<%= @order.postal_code %> <%=@order.shipping_address %><br>
-            <div class="text-left"><%= @order.name%></div>
+            <div class="text-left"><%= "購入者名@order.name" %></div>
 
           </td>
         </tr>
@@ -26,9 +26,9 @@
         </tr>
         <tr>
           <th>注文ステータス</th>
-          <td><%= @order.order_status %>
-            <%= form_with model:@order, url:admin_order_path, local:true do |f| %>
-            <%= f.select :order_status, Order.order_status.keys, class: "order_status_select" %>
+          <td><%= @order.order_status_i18n %>
+            <%= form_with model:@order, url:admin_order_path, method: :patch, local:true do |f| %>
+            <%= f.select :order_status, Order.order_statuses.keys, :selected=>Order.order_statuses[@order.order_status], class: "order_status_select" %>
             <%= f.submit "更新", class:"btn btn-success" %>
             <% end %>
           </td>
@@ -36,7 +36,7 @@
       </table>
     </div>
 
-    <div class="col-mt-8 text-left"></div>
+    <div class="col-mt-8 text-left">
       <table class="table table-stripped">
         <thead>
           <tr class="order-info">
@@ -49,18 +49,42 @@
           </tr>
         </thead>
         <tbody>
-          <% @order.orders each do |order| %>
+          <% @order_details.each do |order_detail| %>
           <tr>
-            <td><%= order.product.name %></td>
-            <td><%= order.product.price %></td>
-            <td><%= order.order_details.quantity %></td>
-            <td><%= order.order_details.total_amount %></td>
-            <td><%= order.order_details.order_status %></td>
+            <td><%= order_detail.product.name %></td>
+            <td><%= order_detail.product.price %></td>
+            <td><%= order_details.quantity %></td>
+            <td><%= "小計をだすorder_details.total_amount" %></td>
+            <td><%= form_with model:@order, url:admin_order_details_path(order), method: :patch, local:true do |f|%>
+                <%= f.select :product_status_i18n, OrderDetail.product_status.keys, :selected=>OrderDetail.product_status[order.product_status], class: "order_status" %>
+                <%= f.submit "更新", class:"btn btn-success" %>
+                <% end %>
+            </td>
             <td><%= %></td>
           </tr>
           <% end %>
         </tbody>
       </table>
+    </div>
+    <div class="col-md-4">
+      <div class="float-right">
+        <table>
+          <tr>
+            <th>商品合計</th>
+            <td><%= (@order.total_amount*1.1)%>円</td>
+          </tr>
+          <tr>
+            <th>送料</th>
+            <td><%= @order.shipping_fee %>円</td>
+          </tr>
+          <tr>
+            <th>請求金額</th>
+            <td><%= @order.total_amount*1.1 + @order.shipping_fee%>円</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
   </div>
 </div>
 
