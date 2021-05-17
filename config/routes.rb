@@ -21,7 +21,7 @@ devise_for :customers, controllers: {
     resources :order_details, only: [:update, :create]
     resources :orders, only: [:index, :show, :update]
     resources :products, only: [:new, :create, :index, :show, :edit, :update]
-    resources :customers
+    resources :customers, only: [:index, :show, :edit, :update,]
   end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

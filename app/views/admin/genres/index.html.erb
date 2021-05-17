@@ -1,18 +1,22 @@
 <div class="container mt-3">
   <div class="row">
     <div class='col-md-6 '>
-      <h2>ジャンル一覧</h2>
+      <h5 class="col-md-4 bg-light pl-4 pr-4 text-center">ジャンル一覧</h5>
 
-      <p>ジャンル名</p>
+      <from class="form-inline mt-3">
+        <div class="form-group">
         <%= form_for @genre, url: admin_genres_path do |f| %>
+        <lavel for="genre">ジャンル名</label>
         <%= f.text_field :name, class: 'form-control genre_name' %>
         <%= f.submit "新規登録",class: 'btn btn-success' %>
        <% end %>
+       </div></from><br>
 
       <table class='table table-hover table-inverse'>
-        <thead>
+        <thead class=bg-light>
           <tr>
           <th>ジャンル</th>
+          <th></th>
           <th></th>
           </tr>
         </thead>

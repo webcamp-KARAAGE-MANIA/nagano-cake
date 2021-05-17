@@ -94,6 +94,7 @@ Product.create!(
     image: File.open("./app/assets/images/can.jpg")
   )
 
+
 # 9.times do |n|
 #   ShippingAddress.create!(
 #     name: "test#{n + 1}",

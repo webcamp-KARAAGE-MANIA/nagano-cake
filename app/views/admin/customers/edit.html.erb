@@ -1,29 +1,35 @@
 <div class="container">
   <div class="row">
     <div class="col-md-8">
-    <span class="bg-secondary"><%= @customer.full_name %>さんの会員情報編集</span>
+    <span class="bg-light"><%= @customer.full_name %>さんの会員情報編集</span>
       <%= form_with model: [:admin, @customer], local:true do |f| %>
-     　<%= f.label :"氏名" %>
-     　<%= f.text_field :surname %>
-     　<%= f.text_field :name %><br>
-     　<%= f.label :"フリガナ" %>
-     　<%= f.text_field :surname_kana %>
-     　<%= f.text_field :name_kana %><br>
-     　<%= f.label :"郵便番号" %>
-     　<%= f.text_field :address %><br>
-     　<%= f.label :"住所" %>
-     　<%= f.text_field :postal_code %><br>
-     　<%= f.label :"電話番号" %>
-     　<%= f.text_field :phone_number %><br>
-     　<%= f.label :"メールアドレス" %>
-     　<%= f.text_field :email %><br>
-     　<%= f.label :"会員ステータス" %>
+      <div class="col-xs-10">
+       <div class="form-group col-xs-9">
+       <%= f.label :"会員ID", class: "col-sm-4 control-label" %>
+       <%= f.label :"#{@customer.id}"%><br>
+     　<%= f.label :"氏名", class: "col-sm-4 control-label" %>
+     　<%= f.text_field :surname , class: "col-sm-3 form-control-static name" %>
+     　<%= f.text_field :name , class: "col-sm-3 form-control-static name"%><br>
+     　<%= f.label :"フリガナ", class: "col-sm-4 control-label" %>
+     　<%= f.text_field :surname_kana, class: "col-sm-3 form-control-static name" %>
+     　<%= f.text_field :name_kana, class: "col-sm-3 form-control-static name" %><br>
+     　<%= f.label :"郵便番号", class: "col-sm-4 control-label" %>
+     　<%= f.text_field :postal_code, class: "col-sm-3 form-control-static name" %><br>
+     　<%= f.label :"住所",class: "col-sm-4 control-label" %>
+     　<%= f.text_field :address, class: "col-sm-7 form-control-static name" %><br>
+     　<%= f.label :"電話番号", class: "col-sm-4 control-label" %>
+     　<%= f.text_field :phone_number, class: "col-sm-3 form-control-static name" %><br>
+     　<%= f.label :"メールアドレス", class: "col-sm-4 control-label" %>
+     　<%= f.text_field :email, class: "col-sm-3 form-control-static name" %><br>
+     　<%= f.label :"会員ステータス",class: "col-sm-4 control-label" %>
      　<%= f.radio_button :is_delete, false %>
      　<%= f.label :is_delete, "退会済", value:false %>
      　<%= f.radio_button :is_delete, true %>
      　<%= f.label :is_delete, "有効", value:true %><br>
      　<%= f.submit "変更を保存",class: 'btn btn-success' %>
      　<% end %>
+     　</div>
+     </div>
      </div>
   </div>
 </div>
