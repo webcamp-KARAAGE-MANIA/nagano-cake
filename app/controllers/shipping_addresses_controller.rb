@@ -10,11 +10,28 @@ class ShippingAddressesController < ApplicationController
     if @shipping_address.save
       redirect_back(fallback_location: shipping_addresses_path)
     else
+      @shipping_addresses = ShippingAddress.all
       render :index
     end
   end
 
   def edit
+    @shipping_address = ShippingAddress.find(params[:id])
+  end
+
+  def update
+    @shipping_address = ShippingAddress.find(params[:id])
+    if @shipping_address.update(shipping_address_paramas)
+      redirect_to shipping_addresses_path
+    else
+      render :edit
+    end
+  end
+
+  def destroy
+    @shipping_address = ShippingAddress.find(params[:id])
+    @shipping_address.destroy
+    redirect_back(fallback_location: shipping_addresses_path)
   end
 
   private
