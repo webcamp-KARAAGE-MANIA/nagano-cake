@@ -26,4 +26,9 @@ class Customer < ApplicationRecord
     self.surname_kana + " " + self.name_kana
   end
 
+  def active_for_authentication?
+    super && (self.is_delete == false)
+  end
+
+
 end

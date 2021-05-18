@@ -1,2 +1,69 @@
-<h1>Customers#edit</h1>
-<p>Find me in app/views/customers/edit.html.erb</p>
+<h5 class="ml-4 my-4 bg-light d-inline-flex">会員情報編集</h5>
+ <div class="ml-5">
+    <%= form_with model: @customer, url: customer_path ,method: :PATCH, local: true do |f| %>
+    <div class="row">
+      <label class="col-lg-3">氏名</label>
+      <div class="col-lg-3">
+        <%= f.text_field :name, autoforcus: true %>
+      </div>
+      <div class="col-lg-3">
+        <%= f.text_field :surname, autoforcus: true %>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">フリガナ</label>
+      <div class="col-lg-3">
+        <%= f.text_field :surname_kana, autoforcus: true %>
+      </div>
+
+      <div class="col-lg-3">
+        <%= f.text_field :name_kana, autoforcus: true %>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">郵便番号</label>
+      <div class="col-lg-3">
+        <%= f.text_field :postal_code, autofocus: true %>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">住所</label>
+      <div class="col-lg-6">
+        <%= f.text_field :address, autofocus: true, :size=>"90x10" %>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">電話番号</label>
+      <div class="col-lg-3">
+        <%= f.text_field :phone_number, autofocus: true %>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <label class="col-lg-3">メールアドレス</label>
+      <div class="col-lg-3">
+        <%= f.email_field :email, autofocus: true %>
+      </div>
+    </div><br>
+
+    <div class="row">
+      <tr>
+        <td>
+          <div class="col-md-8 offset-md-3">
+          <%= f.submit "編集内容を保存", class: "btn btn-success btn-sm" %>
+          </div>
+        </td>
+        <td>
+          <div class="col-md-8 offset-md-6">
+          <p>↓退会機能できていないので後ほど修正します！</p>
+            <%= link_to "退会する", customer_path, class: "btn btn-danger btn-sm" %>
+          </div>
+        </td>
+      </tr>
+    </div>
+  <% end %>
+  </div>
