@@ -1,6 +1,6 @@
 class Product < ApplicationRecord
   belongs_to :genre
-  belongs_to :cart_item
+  has_many :cart_items ,dependent: :destroy
   attachment :image
 
   validates :name, presence: true, uniqueness: true, length: {maximum: 20}

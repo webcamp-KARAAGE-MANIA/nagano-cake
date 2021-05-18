@@ -1,12 +1,27 @@
-<div class="container mt-3 w-auto mx-auto">
+<div class="container mt-3">
   <div class="row">
-    <div class="col_md_6">
+    <div class="col_md_2 mx-auto w-auto">
+      <div class="pull-right">
       <%= attachment_image_tag @product, :image, fallback:"no-image.png", size: '230x180' %>
+      </div>
     </div>
-    <div class="col_me_6">
+    <div class="col_md_2 mx-auto w-auto">
+      <div class="pull-left">
       <h5><%= @product.name %></h5>
       <p><%= @product.introduction %></p>
-      <p class="mt-5"><%= @product.price %></p>
+      <p class="mt-5"><%= @product.add_tax_price.to_s(:delimited) %>(税込）</p>
+      <div class="field">
+        <% if @product.is_active == true %>
+            <%= form_for @cart_item, url: cart_items_path(@cart_item) do |f| %>
+              <%= f.hidden_field :product_id, value: @product.id %>
+              <%= f.select :quantity, options_for_select((1..5).to_a), include_blank: "個数選択" %>
+              <%= f.submit "カートに入れる", class: "btn btn-success" %>
+            <% end %>
+          <% else %>
+            <h3>売り切れ中</h3>
+          <% end %>
+      </div>
+    </div>
     </div>
   </div>
 </div>
