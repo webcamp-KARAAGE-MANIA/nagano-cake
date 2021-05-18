@@ -6,4 +6,11 @@ class Order < ApplicationRecord
   enum payment_method: { クレジットカード: 0, 銀行振り込み: 1}
   # モデル内で定義されたenumは、モデルを通じてデータベースのカラムとつながっている
   # モデルオブジェクトにenum定義することによって、該当するカラムの値の参照や設定などを行えるメソッドが追加される
+  def order_product_total
+    total_amount - shipping_fee.round
+  end
+
+  def order_detail_product_total
+    order.order_detail.product.proce * order.order_detail.quantity.round
+  end
 end

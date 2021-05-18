@@ -1,29 +1,26 @@
 Rails.application.routes.draw do
-
+  
+  devise_for :admins, controllers: {
+    sessions:      'admins/sessions',
+    passwords:     'admins/passwords',
+    registrations: 'admins/registrations'
+  }
+  devise_for :customers, controllers: {
+    sessions:      'customers/sessions',
+    passwords:     'customers/passwords',
+    registrations: 'customers/registrations'
+  }
+  
  root :to => 'homes#top'
   get 'homes/about'
+  get 'orders/complete', to: 'orders#complete', as: 'complete_order'
+  post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
   resources :customers
 
-  get 'orders/new'
-  get 'orders/confirm'
-  get 'orders/complete'
-  get 'shipping_addresses/index'
-  get 'shipping_addresses/edit'
   namespace :admin do
     get 'orders/index'
     get 'orders/show'
   end
-
-  devise_for :admins, controllers: {
-  sessions:      'admins/sessions',
-  passwords:     'admins/passwords',
-  registrations: 'admins/registrations'
-}
-devise_for :customers, controllers: {
-  sessions:      'customers/sessions',
-  passwords:     'customers/passwords',
-  registrations: 'customers/registrations'
-}
 
   namespace :admin do
     resources :genres

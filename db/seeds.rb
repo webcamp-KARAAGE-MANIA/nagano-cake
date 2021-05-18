@@ -49,6 +49,7 @@ Genre.create!(
   name:"チョコレート"
 )
 
+
 Product.create!(
     name: "ショートケーキ",
     introduction: "いちごたくさんのショートケーキ！",
@@ -95,14 +96,14 @@ Product.create!(
   )
 
 
-# 9.times do |n|
-#   ShippingAddress.create!(
-#     name: "test#{n + 1}",
-#     postal_code: "123456#{n + 1}",
-#     address: "東京都渋谷区神南1丁目19-11 パークウェースクエア2 4階#{n + 1}",
-#     customer_id: n + 1
-#   )
-# end
+  9.times do |n|
+  ShippingAddress.create!(
+    name: "test#{n + 1}",
+    postal_code: "123456#{n + 1}",
+    address: "東京都渋谷区神南1丁目19-11 パークウェースクエア2 4階#{n + 1}",
+    customer_id: n + 1
+  )
+  end
 
 5.times do |n|
   Order.create!(
@@ -112,7 +113,6 @@ Product.create!(
     shipping_fee: "800",
     total_amount: "#{1000 + (n * 1000) +800}",
     payment_method: "クレジットカード"
-
   )
 end
 

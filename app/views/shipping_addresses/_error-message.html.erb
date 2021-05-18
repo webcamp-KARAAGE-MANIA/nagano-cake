@@ -1,0 +1,9 @@
+<% if shipping_address.errors.any? %>
+  <div class="text-danger alert alert-warning">
+    【<%= shipping_address.errors.count %>件のエラーが発生しました】<br>
+    <%= shipping_address.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </div>
+<% end %>
+
