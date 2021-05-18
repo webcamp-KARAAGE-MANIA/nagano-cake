@@ -1,0 +1,12 @@
+<div class="container mt-3 w-auto mx-auto">
+  <div class="row">
+    <div class="col_md_6">
+      <%= attachment_image_tag @product, :image, fallback:"no-image.png", size: '230x180' %>
+    </div>
+    <div class="col_me_6">
+      <h5><%= @product.name %></h5>
+      <p><%= @product.introduction %></p>
+      <p class="mt-5"><%= @product.price %></p>
+    </div>
+  </div>
+</div>
