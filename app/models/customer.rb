@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
+
   validates :surname,
             :name,
             :surname_kana,
@@ -15,7 +16,6 @@ class Customer < ApplicationRecord
             :phone_number,
             :email,
             :encrypted_password,
-
             presence: true
 
   def full_name
