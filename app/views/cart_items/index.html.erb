@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="bg-light pl-4 pr-4">
+      <h5>ショッピングカート</h5>
+    </div>
+    <div class="d-flex ml-auto">
+       <%= link_to "カートを空にする",cart_items_path(@cart_items),method: :delete, class: 'btn btn-danger' %>
+    </div>
+    <table class="table table-bordered mt-3">
+     <thead class="thead-light">
+      <tr>
+        <th>商品名</th>
+        <th>単価（税込）</th>
+        <th>数量</th>
+        <th>小計</th>
+        <th></th>
+      </tr>
+     </thead>
+     <tbody>
+       <% @cart_items. each do |cart_item| %>
+       <tr>
+          <td>
+            <%= attachment_image_tag cart_item.product, :image, fallback:"no-image.png", size: '80x50' %>
+            <%= cart_item.product.name %>
+          </td>
+          <td>
+            ¥<%= cart_item.product.add_tax_price.to_s(:delimited) %>
+          </td>
+          <td>
+            <%= form_with model:cart_item do |f| %>
+              <%= f.number_field :quantity, max: 5,min: 1 %>
+              <%= f.submit "更新", class: "btn btn-success" %>
+            <% end %>
+          </td>
+          <td>
+            ¥<%#= (cart_item.product.total_price).to_i %>
+          </td>
+       </tr>
+       <% end %>
+     </tbody>
+    </table>
+     <div class="col-xs-3 pull-right billing">
+      <table class="table table-bordered text-right">
+        <thead>
+          <tr>
+            <td class="warning">合計金額</td>
+            <td class="text-right" id='total_price'>
+              ¥<%#= total_price(@cart_items).to_s(:delimited) %>
+            </td>
+          </tr>
+        </thead>
+      </table>
+    </div>
+  </div>
+</div>
