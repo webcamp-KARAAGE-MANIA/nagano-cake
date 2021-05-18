@@ -59,4 +59,8 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  # def sign_up_params
+  #   params.permit(:name, :surname, :surname, :surname_kana, :email, :postal_code, :phone_number, :address)
+  # end
 end
