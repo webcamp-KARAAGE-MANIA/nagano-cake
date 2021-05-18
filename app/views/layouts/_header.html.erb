@@ -14,10 +14,8 @@
           <li><%= link_to ' ジャンル一覧',admin_genres_path ,class: 'nav-link text-dark'%></li>
           <li><%= link_to ' ログアウト', destroy_admin_session_path, method: :delete,class: 'nav-link text-drak' %></li>
         <% elsif customer_signed_in? %>
-
           <li><%= link_to ' 商品一覧',products_path,class: 'nav-link text-drak' %></li>
           <li><%= link_to ' カート',cart_items_path,class: 'nav-link text-drak' %></li>
-
         <% else %>
         　<li><%= link_to ' 管理者ログイン', new_admin_session_path ,class: 'nav-link text-drak'%></li>
           <li><%= link_to ' About',new_customer_session_path ,class: 'nav-link text-drak' %></li>
