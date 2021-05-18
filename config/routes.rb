@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
-    get 'orders/index'
-    get 'orders/show'
-  end
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -15,6 +11,17 @@ Rails.application.routes.draw do
     registrations: 'customers/registrations'
   }
 
+ root :to => 'homes#top'
+  get 'homes/about'
+  get 'orders/complete', to: 'orders#complete', as: 'complete_order'
+  post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
+ 
+
+  namespace :admin do
+    get 'orders/index'
+    get 'orders/show'
+  end
+
 
   namespace :admin do
     resources :genres
@@ -23,8 +30,7 @@ Rails.application.routes.draw do
     resources :products, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update,]
   end
-  root :to => 'homes#top'
-  get 'homes/about'
+  
   resources :products, only: [:index, :show]
   resources :cart_items
 
