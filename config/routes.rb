@@ -23,5 +23,8 @@ devise_for :customers, controllers: {
     resources :products, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update,]
   end
+
+  resources :products, only: [:index, :show]
+  resources :cart_items
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
