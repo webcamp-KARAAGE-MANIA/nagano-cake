@@ -10,7 +10,7 @@
       <table>
         <tr>
           <th>注文日</th>
-          <td><%= @order,created_at.strftime("%Y/%m/%d") %></td>
+          <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
         </tr>
         <tr>
           <th>配送先</th>
@@ -61,7 +61,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= @order_details.each do |order_detail| %>
+          <% @order_details.each do |order_detail| %>
           <tr>
             <td><%= order_detail.product.name %></td>
             <td><%= order_detail.product.add_tax_price.to_s(:delimited) %></td>

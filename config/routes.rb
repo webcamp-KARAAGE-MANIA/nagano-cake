@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
-<<<<<<< HEAD
-  
+
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
     passwords:     'admins/passwords',
@@ -11,35 +10,18 @@ Rails.application.routes.draw do
     passwords:     'customers/passwords',
     registrations: 'customers/registrations'
   }
-  
+
  root :to => 'homes#top'
   get 'homes/about'
   get 'orders/complete', to: 'orders#complete', as: 'complete_order'
   post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
   resources :customers
-=======
->>>>>>> origin/develop
 
   namespace :admin do
     get 'orders/index'
     get 'orders/show'
   end
 
-<<<<<<< HEAD
-=======
-  devise_for :admins, controllers: {
-    sessions:      'admins/sessions',
-    passwords:     'admins/passwords',
-    registrations: 'admins/registrations'
-  }
-
-  devise_for :customers, controllers: {
-    sessions:      'customers/sessions',
-    passwords:     'customers/passwords',
-    registrations: 'customers/registrations'
-  }
-
->>>>>>> origin/develop
   namespace :admin do
     resources :genres
     resources :order_details, only: [:update, :create]

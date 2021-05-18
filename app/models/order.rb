@@ -10,7 +10,4 @@ class Order < ApplicationRecord
     total_amount - shipping_fee.round
   end
 
-  def order_detail_product_total
-    order.order_detail.product.proce * order.order_detail.quantity.round
-  end
 end
