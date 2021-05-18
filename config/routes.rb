@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+ root :to => 'homes#top'
+  get 'homes/about'
+  resources :customers
 
   get 'orders/new'
   get 'orders/confirm'
@@ -10,6 +13,7 @@ Rails.application.routes.draw do
     get 'orders/index'
     get 'orders/show'
   end
+
   devise_for :admins, controllers: {
   sessions:      'admins/sessions',
   passwords:     'admins/passwords',
