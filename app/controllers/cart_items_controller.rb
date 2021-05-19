@@ -9,24 +9,18 @@ class CartItemsController < ApplicationController
     end
 
     def create
-         @cart_item = CartItem.new(cart_item_params)
-
-    #      @cart_items.each do |cart_item|
-    # if cart_item.item_id == @cart_item.item_id
-    #   new_quantity = cart_item.quantity + @cart_item.quantity
-    #   cart_item.update_attribute(:quantity, new_quantity)
-    #   @cart_item.delete
-    # end
-        #  @update_cart_item =  CartItem.find_by(product: @cart_item.product) #カートアイテムの商品
-        #   if  @update_cart_item.present? && @cart_item.valid? #present:変数に値が入っていたらtrue #バリデーションチェック
-        #       @cart_item.quantity += @update_cart_item.quantity #元々ある商品の個数+増やす個数
-        #       @update_cart_item.destroy #たし終わったら消す
-        #   end
-
-         @cart_item.customer_id = current_customer.id #誰のカートか紐付け
-
-         @cart_item.save
-         redirect_to cart_items_path
+        @cart_item = CartItem.new(cart_item_params)
+        @cart_item.customer_id = current_customer.id #誰のカートか紐付け
+        @cart_items = current_customer.cart_items.all
+        @cart_items.each do |cart_item|
+     if cart_item.product_id == @cart_item.product_id
+       new_quantity = cart_item.quantity + @cart_item.quantity
+       cart_item.update_attribute(:quantity, new_quantity)
+       @cart_item.delete
+     end
+    end
+        @cart_item.save
+        redirect_to cart_items_path
     end
 
     def update
