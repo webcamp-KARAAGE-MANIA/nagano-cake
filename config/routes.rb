@@ -15,15 +15,11 @@ Rails.application.routes.draw do
   get 'homes/about'
   get 'orders/complete', to: 'orders#complete', as: 'complete_order'
   post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
-  # トライNo.1
-  # post 'customers/hide', to: 'customers#hide', as: 'hide_customer'
-  # get 'customers/confirm', to: 'customers#confirm', as: 'confirm_customer'
 
   namespace :admin do
     get 'orders/index'
     get 'orders/show'
   end
-
 
   namespace :admin do
     resources :genres
@@ -34,8 +30,12 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: [:index, :show]
-  resources :cart_items
-
+  resources :cart_items do
+    collection do
+    delete 'destroy_all'
+   end
+  end
+  
   resources :orders
   resources :shipping_addresses, only: [:new, :create, :index, :edit, :update, :destroy]
 

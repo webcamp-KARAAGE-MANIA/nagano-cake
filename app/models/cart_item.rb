@@ -3,6 +3,9 @@ belongs_to :customer
 belongs_to :product
 
 validates :customer_id, :product_id, :quantity, presence: true
-#validates :quantity, numericality: { only_integer: true } #数値のみか検証
+
+ def subtotal_price
+		product.add_tax_price.to_i * quantity.to_i
+ end
 
 end
