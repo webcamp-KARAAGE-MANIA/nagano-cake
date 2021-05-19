@@ -1,16 +1,16 @@
 <div class="container mt-3">
   <div class="row">
-    <div class="col_md_2 mx-auto w-auto">
-      <div class="pull-right">
-      <%= attachment_image_tag @product, :image, fallback:"no-image.png", size: '230x180' %>
-      </div>
+    <div class="col_md_2 offset-md-4">
+
+      <%= attachment_image_tag @product, :image, fallback:"no-image.png", size: '250x180' %>
+
     </div>
-    <div class="col_md_2 mx-auto w-auto">
-      <div class="pull-left">
+    <div class="col_md_2 offset-md-4">
+
       <h5><%= @product.name %></h5>
       <p><%= @product.introduction %></p>
-      <p class="mt-5"><%= @product.add_tax_price.to_s(:delimited) %>(税込）</p>
-      <div class="field">
+      <p class="mt-3">¥<%= @product.add_tax_price.to_s(:delimited) %>(税込）</p>
+
         <% if customer_signed_in? %>
           <% if @product.is_active == true %>
             <%= form_for @cart_item, url: cart_items_path(@cart_item) do |f| %>
@@ -22,8 +22,8 @@
             <h3>売り切れ中</h3>
           <% end %>
           <% end %>
-      </div>
-    </div>
+
+
     </div>
   </div>
 </div>

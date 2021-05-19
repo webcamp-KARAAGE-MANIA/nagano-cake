@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
-    <div class="col_md_12">
-      <h3>商品一覧</h3><h5>(全<%= @products.count %>件)</h5>
+    <div class="col_md_12 bg-light">
+      <h4>商品一覧</h4><h6>(全<%= @products.count %>件)</h6>
     </div>
   </div>
       <div class="row">
@@ -13,10 +13,16 @@
                 <%= attachment_image_tag product, :image, fallback:"no-image.png", size: '180x130' %>
               <div><%= product.name %></div>
               <div>¥<%= product.add_tax_price.to_s(:delimited) %></div>
+              <div><% if product.is_active == true %>
+                 <p class="text-success">販売中</p>
+                   <% else %>
+                 <p class="text-black-50">売り切れ</p>
+                    <% end %></div>
             <% end %>
             </div>
         <% end %>
       </div>
     </div>
   </div>
+ <div class="col align-self-center"><%= paginate @products%></div>
 </div>
