@@ -13,8 +13,6 @@ Rails.application.routes.draw do
 
  root :to => 'homes#top'
   get 'homes/about'
-  get 'orders/complete', to: 'orders#complete', as: 'complete_order'
-  post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
 
   namespace :admin do
     get 'orders/index'
@@ -35,8 +33,13 @@ Rails.application.routes.draw do
     delete 'destroy_all'
    end
   end
-  
-  resources :orders
+
+  resources :orders do
+    collection do
+      post :confirm
+      get :complete
+    end
+  end
   resources :shipping_addresses, only: [:new, :create, :index, :edit, :update, :destroy]
 
   resources :customers, only: [:show, :edit, :update] do
