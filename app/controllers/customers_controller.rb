@@ -1,34 +1,40 @@
 class CustomersController < ApplicationController
+
   def show
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
   end
 
   def edit
-    @customer = Customer.find(params[:id])
-
+    @customer = current_customer
   end
 
   def confirm
+    @customer = current_customer
   end
 
   def update
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     if @customer.update(customer_params)
-       redirect_to edit_customer_path
+       flash[:success] = "登録情報を無事変更しました😊"
+       redirect_to customer_path
     else
-       render 'edit'
+       render :edit and return
     end
   end
 
   def hide
-    @customer = Customer.find(params[:id])
+    @customer = current_customer
     @customer.update(is_delete: true)
-    end
+    # byebug
+    reset_session
+    flash[:notice] = "ありがとうございました！またのご利用を心よりお待ちしております😊"
+    redirect_to root_path
+  end
 
   private
 
   def customer_params
-    params.require(:customer).permit(:name, :name_kana, :surname, :surname_kana, :postal_code, :address, :phone_number, :email)
+    params.require(:customer).permit(:name, :name_kana, :surname, :surname_kana, :postal_code, :address, :phone_number, :email, :is_delete)
   end
 
 end

@@ -15,7 +15,9 @@ Rails.application.routes.draw do
   get 'homes/about'
   get 'orders/complete', to: 'orders#complete', as: 'complete_order'
   post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
- 
+  # トライNo.1
+  # post 'customers/hide', to: 'customers#hide', as: 'hide_customer'
+  # get 'customers/confirm', to: 'customers#confirm', as: 'confirm_customer'
 
   namespace :admin do
     get 'orders/index'
@@ -30,13 +32,19 @@ Rails.application.routes.draw do
     resources :products, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update,]
   end
-  
+
   resources :products, only: [:index, :show]
   resources :cart_items
 
   resources :orders
   resources :shipping_addresses, only: [:new, :create, :index, :edit, :update, :destroy]
-  resources :customers
 
+  resources :customers, only: [:show, :edit, :update] do
+    member do
+      patch 'hide'
+      get 'confirm'
+    end
+
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
