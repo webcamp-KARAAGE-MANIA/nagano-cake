@@ -91,4 +91,13 @@ ActiveRecord::Schema.define(version: 2021_05_18_075932) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "shipping_addresses", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string "attention"
+    t.string "postal_code"
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
 end

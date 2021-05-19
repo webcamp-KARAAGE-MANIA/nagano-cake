@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   get 'homes/about'
   get 'orders/complete', to: 'orders#complete', as: 'complete_order'
   post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
- 
+
 
   namespace :admin do
     get 'orders/index'
@@ -30,9 +30,13 @@ Rails.application.routes.draw do
     resources :products, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update,]
   end
-  
+
   resources :products, only: [:index, :show]
-  resources :cart_items
+  resources :cart_items do
+    collection do
+    delete 'destroy_all'
+   end
+  end
 
   resources :orders
   resources :shipping_addresses, only: [:new, :create, :index, :edit, :update, :destroy]
