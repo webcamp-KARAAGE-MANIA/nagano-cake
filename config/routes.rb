@@ -16,12 +16,10 @@ Rails.application.routes.draw do
   get 'orders/complete', to: 'orders#complete', as: 'complete_order'
   post 'orders/confirm', to: 'orders#confirm', as: 'confirm_order'
 
-
   namespace :admin do
     get 'orders/index'
     get 'orders/show'
   end
-
 
   namespace :admin do
     resources :genres
@@ -37,7 +35,7 @@ Rails.application.routes.draw do
     delete 'destroy_all'
    end
   end
-
+  
   resources :orders
   resources :shipping_addresses, only: [:new, :create, :index, :edit, :update, :destroy]
   resources :customers
