@@ -38,7 +38,13 @@ Rails.application.routes.draw do
   
   resources :orders
   resources :shipping_addresses, only: [:new, :create, :index, :edit, :update, :destroy]
-  resources :customers
 
+  resources :customers, only: [:show, :edit, :update] do
+    member do
+      patch 'hide'
+      get 'confirm'
+    end
+
+  end
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
