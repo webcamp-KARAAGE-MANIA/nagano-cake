@@ -10,7 +10,7 @@ class ShippingAddressesController < ApplicationController
     if @shipping_address.save
       redirect_back(fallback_location: shipping_addresses_path)
     else
-      @shipping_addresses = ShippingAddress.all
+      @shipping_addresses = current_customer.shipping_addresses
       render :index
     end
   end
@@ -24,6 +24,7 @@ class ShippingAddressesController < ApplicationController
     if @shipping_address.update(shipping_address_paramas)
       redirect_to shipping_addresses_path
     else
+      @shipping_addresses = current_customer.shipping_addresses
       render :edit
     end
   end

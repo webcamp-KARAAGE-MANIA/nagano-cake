@@ -47,7 +47,13 @@
           </tr>
           <tr>
             <td>
-              <%= f.collection_select(:shipping_address, ShippingAddress.all, :id, :address ) %>
+              <%#= f.collection_select(:shipping_address, current_customer.shipping_addresses, :id, :postal_code, prompt: "選択してください") %>
+              <select name="order[shipping_address]">
+                <option value="">選択してください</option>
+                <% current_customer.shipping_addresses.each do |shipping_address| %>
+                  <option value="<%= shipping_address.id %>"><%= shipping_address.postal_code %><%= shipping_address.address %><%= shipping_address.attention %></option>
+                <% end %>
+              </select>
             </td>
           </tr>
           <tr>
