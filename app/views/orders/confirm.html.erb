@@ -6,7 +6,7 @@
   </div>
   <div class="row">
       <div class="col-md-8">
-          <% @order.order_details.each do |order_detail| %>
+          <% form_with(model: @order, local: true) do |f| %>
             <table table table-hover table-bordered border-dark>
               <thead class="bg-light">
                 <tr>
@@ -17,15 +17,16 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td><%= order_detail.product.name %></td>
-                  <td><%= order_detail.product.add_tax_price.to_s(:delimited) %></td>
-                  <td><%= order_detail.quantity %></td>
-                  <td><%= order_detail.rder_detail_product_total %></td>
-                </tr>
+                <% @order.order_details.each do |order_detail| %>
+                  <tr>
+                    <td><%= order_detail.product.name %></td>
+                    <td><%= order_detail.product.add_tax_price.to_s(:delimited) %></td>
+                    <td><%= order_detail.quantity %></td>
+                    <td><%= order_detail.order_detail_product_total %></td>
+                  </tr>
+                 <% end %>
               </tbody>
             </table>
-          <% end %>
       </div>
       <div class="col-md-4">
         <table table table-hover table-bordered border-dark>
@@ -35,7 +36,11 @@
           </tr>
           <tr>
             <th class="bg-light">商品合計</th>
-            <td><%= @order.order_detail. order_detail_product_total.to_s(:delimited) %></td>
+            <td>
+              <% @order.order_details.each do |order_detail| %>
+                <%= order_detail.order_detail_product_total.to_s(:delimited) %>
+              <% end %>
+            </td>
           </tr>
           <tr>
             <th class="bg-light">請求金額</th>
@@ -59,5 +64,6 @@
       </tr>
     </table>
   </div>
-  <%= link_to '注文を確定する', class:'btn btn-primary' %>
+  <%= f.submit '注文を確定する', class:'btn btn-success' %>
+  <% end %>
 </div>
