@@ -32,13 +32,13 @@ class CartItemsController < ApplicationController
     def destroy
         @cart_item = CartItem.find(params[:id])
         @cart_item.destroy
-        redirect_to cart_items_path, notice: '削除いたしました'
+        redirect_to cart_items_path, notice: '削除しました'
     end
 
     def destroy_all
         @cart_items = current_customer.cart_items
         @cart_items.destroy_all
-        redirect_to cart_items_path, notice: 'カート内商品全て削除いたしました'
+        redirect_to cart_items_path, notice: 'カート内商品全て削除しました'
     end
 
 	private

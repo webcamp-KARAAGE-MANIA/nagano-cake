@@ -1,6 +1,10 @@
 class ProductsController < ApplicationController
 
   def index
+    # if product_id == @genre.product_id
+    #   @products = genre.product.all
+    #   @genres = Genre.all
+    # end
     @products = Product.page(params[:page]).per(8)
     @genres = Genre.all
   end
