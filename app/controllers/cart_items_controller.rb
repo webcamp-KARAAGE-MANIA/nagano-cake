@@ -20,25 +20,25 @@ class CartItemsController < ApplicationController
      end
     end
         @cart_item.save
-        redirect_to cart_items_path
+        redirect_to cart_items_path, notice: 'カートに商品が追加されました'
     end
 
     def update
         @cart_item = CartItem.find(params[:id])
         @cart_item.update(cart_item_params)
-        redirect_to cart_items_path
+        redirect_to cart_items_path, notice: '商品数量変更完了しました'
     end
 
     def destroy
         @cart_item = CartItem.find(params[:id])
         @cart_item.destroy
-        redirect_to cart_items_path
+        redirect_to cart_items_path, notice: '削除いたしました'
     end
 
     def destroy_all
         @cart_items = current_customer.cart_items
         @cart_items.destroy_all
-        redirect_to cart_items_path
+        redirect_to cart_items_path, notice: 'カート内商品全て削除いたしました'
     end
 
 	private
