@@ -10,4 +10,8 @@ class Order < ApplicationRecord
     total_amount - shipping_fee.round
   end
 
+  def subtotal_price
+		product.add_tax_price.to_i * quantity.to_i
+  end
+
 end
