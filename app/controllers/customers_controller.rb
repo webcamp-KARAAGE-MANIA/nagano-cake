@@ -18,7 +18,7 @@ class CustomersController < ApplicationController
        flash[:success] = "登録情報を無事変更しました😊"
        redirect_to customer_path
     else
-       render :edit and return
+       render :edit
     end
   end
 
