@@ -1,13 +1,12 @@
 class ProductsController < ApplicationController
 
   def index
-    # if gerel idが送られてきていたら
-    #   @products = genre_id.products
+    # if product_id == @genre.product_id
+    #   @products = genre.product.all
     #   @genres = Genre.all
-    # else
-      @products = Product.page(params[:page]).per(8)
-      @genres = Genre.all
     # end
+    @products = Product.page(params[:page]).per(8)
+    @genres = Genre.all
   end
 
   def show

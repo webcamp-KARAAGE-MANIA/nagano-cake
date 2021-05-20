@@ -56,7 +56,7 @@ class OrdersController < ApplicationController
     @order = Order.new(order_params)
     @order.customer_id = current_customer.id
     @order.shipping_fee = 800
-    @order.save
+    if @order.save
     @cart_items = current_customer.cart_items.all
     @cart_items.each do |cart_item|
       @order_details = @order.order_details.new
@@ -68,7 +68,10 @@ class OrdersController < ApplicationController
     @order.shipping_fee = 800
     @total_price = @cart_items.sum{|c| c.product.add_tax_price * c.quantity }
     @order.total_amount = @order.shipping_fee + @total_price
-    redirect_to complete_orders_path
+    redirect_to complete_orders_path, notice: '注文を承りました！'
+    else
+      render :new
+    end
   end
 
   def show
