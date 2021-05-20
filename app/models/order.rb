@@ -10,6 +10,11 @@ class Order < ApplicationRecord
     total_amount - shipping_fee.round
   end
 
+
+  def full_address
+    self.postal_code + " " + self.address + " " + self.attention
+  end
+
   def subtotal_price
 		product.add_tax_price.to_i * quantity.to_i
   end

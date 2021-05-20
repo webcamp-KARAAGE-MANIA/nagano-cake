@@ -6,7 +6,7 @@
   </div>
   <div class="row">
     <div class="form-group">
-      <%= form_with model: @order, local:true, url: confirm_orders_path(@order) do |f| %>
+      <%= form_with model: @order, local:true, url: {action: 'confirm'} do |f| %>
       <table>
           <tr><th>支払方法</th></tr>
           <tr>
@@ -47,13 +47,7 @@
           </tr>
           <tr>
             <td>
-              <%#= f.collection_select(:shipping_address, current_customer.shipping_addresses, :id, :postal_code, prompt: "選択してください") %>
-              <select name="order[shipping_address]">
-                <option value="">選択してください</option>
-                <% current_customer.shipping_addresses.each do |shipping_address| %>
-                  <option value="<%= shipping_address.id %>"><%= shipping_address.postal_code %><%= shipping_address.address %><%= shipping_address.attention %></option>
-                <% end %>
-              </select>
+              <%= f.collection_select(:shipping_address_id, current_customer.shipping_addresses, :id, :full_address, prompt: "選択してください") %>
             </td>
           </tr>
           <tr>
