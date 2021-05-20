@@ -4,6 +4,9 @@
       <h5 class="lh-auto text-center">注文情報入力</h5>
     </div>
   </div>
+  <%= form_for(@order) do |f| %>
+    <%= render 'layouts/errors', object: f.object %>
+  <% end %>
   <div class="row">
     <div class="form-group">
       <%= form_with model: @order, local:true, url: {action: 'confirm'} do |f| %>
@@ -47,7 +50,7 @@
           </tr>
           <tr>
             <td>
-              <%= f.collection_select(:shipping_address_id, current_customer.shipping_addresses, :id, :full_address, prompt: "選択してください") %>
+              <%= f.collection_select(:shipping_address_id, current_customer.shipping_addresses, :id, :full_address) %>
             </td>
           </tr>
           <tr>
@@ -82,8 +85,10 @@
             </td>
           </tr>
       </table>
-      <%= f.submit '確認画面へ進む', class:'btn btn-primary' %>
-      <% end %>
     </div>
   </div>
+  <div class="row d-flex justify-content-center">
+    <%= f.submit '確認画面へ進む', class:'btn btn-primary' %>
+  </div>
+  <% end %>
 </div>

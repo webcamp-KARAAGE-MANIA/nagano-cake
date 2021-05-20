@@ -4,7 +4,9 @@
       <h5 class="lh-auto text-center">配送先編集</h5>
     </div>
   </div>
-  <%= render 'shipping_addresses/error-message', shipping_address: @shipping_address %>
+  <%= form_for(@shipping_address) do |f| %>
+    <%= render 'layouts/errors', object: f.object %>
+  <% end %>
   <div class="row mt-4">
     <div class="form-group col-md-10">
       <%= form_with model: @shipping_address, local:true do |f| %>
