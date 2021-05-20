@@ -50,16 +50,16 @@
         </table>
       </div>
     </div>
-    <div class="row">
-      <table>
+    <div class="row col-md-12">
+      <table class="table table-borderless">
         <tr>
-          <th>支払方法</th>
-          <td><%= @order.payment_method %></td>
+          <th class="col-xs-2">支払方法</th>
+          <td class="col-xs-10"><%= @order.payment_method %></td>
           <%= f.hidden_field :payment_method, :value => @order.payment_method %>
         </tr>
         <tr>
-          <th>お届け先</th>
-          <td>
+          <th class="col-xs-2">お届け先</th>
+          <td class="col-xs-10">
             〒<%= @order.postal_code %> <%= @order.shipping_address %><br>
             <%= @order.attention %>
             <%= f.hidden_field :postal_code, :value => @order.postal_code %>
@@ -69,6 +69,8 @@
         </tr>
       </table>
     </div>
-  <%= f.submit '注文を確定する', class:'btn btn-success' %>
+    <div class="row d-flex justify-content-center">
+       <%= f.submit '注文を確定する', class:'btn btn-success' %>
+    </div>
   <% end %>
 </div>
