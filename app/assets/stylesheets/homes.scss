@@ -5,8 +5,8 @@
 .b-picture {
   width: auto; /* 横幅いっぱい */
   height: auto; /* 高さ300px */
-  background: image-url('background.jpg');
-  background-color:rgba(255,255,255,0.8);
+  // background: image-url('background.jpg');
+  // background-color:rgba(255,255,255,0.8);
   background-position: top center;
   background-size: auto;
 }
@@ -16,12 +16,6 @@
   margin :0px;
 }
 
-.bg-image {
-  background-image: url('ここに画像path');
-  width: 220px;
-  height: 220px;
-  background-size: cover;
-}
 .bg-mask {
   height: 100%;
   background: rgba(255,255,255,0.5);

@@ -32,3 +32,32 @@ font-family: 'HanziPen SC' ;
   height: 100%;
   width: 100%;
 }
+.application {
+  margin:0px;
+  padding:0px;
+}
+
+body {
+  background-color: #f5f2eb;
+  color: #592e15;
+}
+
+main {
+  color: #592e15;
+}
+
+/* Header */
+
+header {
+  font-size: 15px;
+  background-color: #eee9dd;
+  color: #592e15;
+}
+
+
+/* Footer */
+
+footer {
+  color: #592e15;
+  background-color: #eee9dd;
+}
