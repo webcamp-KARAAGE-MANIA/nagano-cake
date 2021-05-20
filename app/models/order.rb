@@ -10,4 +10,7 @@ class Order < ApplicationRecord
     total_amount - shipping_fee.round
   end
 
+  def full_address
+    self.postal_code + " " + self.address + " " + self.attention
+  end
 end

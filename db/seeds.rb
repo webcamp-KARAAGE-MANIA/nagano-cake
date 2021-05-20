@@ -111,6 +111,7 @@ Product.create!(
     postal_code: "123456#{n + 1}",
     shipping_fee: "800",
     total_amount: "#{1000 + (n * 1000) +800}",
+    attention: "唐揚げ",
     payment_method: "クレジットカード"
   )
 end
