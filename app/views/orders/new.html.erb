@@ -7,9 +7,9 @@
   <%= form_for(@order) do |f| %>
     <%= render 'layouts/errors', object: f.object %>
   <% end %>
+  <%= form_with model: @order, local:true, url: {action: 'confirm'} do |f| %>
   <div class="row">
     <div class="form-group">
-      <%= form_with model: @order, local:true, url: {action: 'confirm'} do |f| %>
       <table>
           <tr><th>支払方法</th></tr>
           <tr>
