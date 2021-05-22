@@ -19,8 +19,12 @@ class CartItemsController < ApplicationController
        @cart_item.delete
      end
     end
-        @cart_item.save
+       if @cart_item.save
         redirect_to cart_items_path, notice: 'カートに商品が追加されました'
+       else
+        @product = Product.find_by(id: @cart_item.product_id)
+        redirect_to product_path(@product)
+       end
     end
 
     def update

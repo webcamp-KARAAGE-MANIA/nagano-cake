@@ -9,7 +9,6 @@ class Product < ApplicationRecord
   validates :introduction, presence: true, length: {minimum: 3, maximum: 100}
   validates :price, presence: true, numericality: { only_integer: true }
   validates :image, presence: true
-  validates :quantity, numericality: true
 
   def add_tax_price
     (self.price * 1.10).round
