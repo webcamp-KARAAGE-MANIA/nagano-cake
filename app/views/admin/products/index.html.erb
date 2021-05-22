@@ -28,7 +28,7 @@
                 <%= product.name %>
               <% end %>
             </td>
-            <td><%= product.price.to_s(:delimited) %></td>
+            <td><%= product.price.to_s(:delimited) %>円</td>
             <td><%= product.genre.name %></td>
             <td>
               <% if product.is_active == true %>
