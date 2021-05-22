@@ -1,5 +1,33 @@
 <div class="container">
   <div class="row">
-    <h5 class="col-12 text-center">ご注文ありがとうございました!</h5>
+    <h3 class="col-12 text-center">
+      ご注文ありがとうございました!<br>
+      真心こめてお作りいたします！
+    </h3>
+  </div>
+  <div class="row justify-content-center align-items-center">
+    <div class="col-lg-10 col-md-11 col-sm-12 mt-5">
+      <h3 class="col-12 text-center">
+        おすすめ商品もご一緒にいかかですか？
+      </h3>
+      <h3>おすすめ商品</h3>
+      <div class="d-flex flex-wrap mt-2">
+        <% @products.first(4).each do |product| %>
+          <div class="col-lg-3 products__image">
+            <%= link_to product_path(product), style: "color: black;" do %>
+              <%= attachment_image_tag product, :image, fallback:"no-image-png", size: "180x150" %>
+              <br>
+              <%= product.name %>
+              <br>
+              ￥<%= product.price.floor %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="mt-5">
+      <%= link_to '注文履歴を確認する', order_path(@order), class:'btn btn-success' %>
+      <%= link_to 'トップに戻る', root_path, class:'btn btn-info' %>
+    </div>
   </div>
 </div>

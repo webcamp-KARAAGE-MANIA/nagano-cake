@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def index
-    @orders = current_customer.orders
+    @orders = current_customer.orders.page(params[:page]).per(10)
   end
 
   def new
@@ -80,16 +80,33 @@ class OrdersController < ApplicationController
   end
 
   def complete
-
+    @products = Product.all
+    @order = current_customer.orders.last(1)
   end
 
-  # def subtotal_price
-  #   product.add_tax_price.to_i * quantity.to_i
-  # end
+  def pay
+    Payjp.api_key = ENV['PAYJP_PRIVATE_KEY']
+    charge = Payjp::Charge.create(
+    amount: @order.total_amount,
+    card: params['payjp-token'],
+    currency: 'jpy'
+    )
+  end
+
+
 
   private
   def order_params
     params.require(:order).permit(:payment_method, :total_amount, :shipping_address, :postal_code, :attention, :shipping_fee)
+  end
+
+  def item_params
+    params.require(:item).permit(
+      :name,
+      :text,
+      :price,
+      #この辺の他コードは関係ない部分なので省略してます
+    ).merge(user_id: current_user.id)
   end
 
 end

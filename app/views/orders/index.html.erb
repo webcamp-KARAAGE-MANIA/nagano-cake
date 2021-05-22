@@ -1,13 +1,11 @@
 <div class="container">
+  <h5 class="ml-4 my-4 bg-light d-inline-flex">注文履歴一覧</h5>
   <% if @orders.present? %>
-    <div class="row">
-      <div class="bg-light pl-4 pr-4 text-center">
-        <h5 class="lh-auto text-center">注文履歴一覧</h5>
-      </div>
-    </div>
-    <div class="row mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-10">
+      <div class="row mt-4">
       <table class="table table-hover table-bordered border-dark">
-        <thead class="bg-light">
+        <thead class="table-secondary">
           <tr>
             <td>注文日</td>
             <td>配送先</td>
@@ -24,7 +22,7 @@
               <td><%= order.shipping_address %></td>
               <td>
                 <% order.order_details.each do |order_detail| %>
-                  <%= order_detail.product.name %>
+                  <%= order_detail.product.name %><br>
                 <% end %>
               </td>
               <td><%= order.total_amount.to_s(:delimited) %>円</td>
@@ -38,4 +36,6 @@
   <% else %>
     <p>注文履歴はありません。</p>
   <% end %>
+    </div>
+  </div>
 </div>
