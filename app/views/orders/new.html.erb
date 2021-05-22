@@ -7,9 +7,9 @@
   <%= form_for(@order) do |f| %>
     <%= render 'layouts/errors', object: f.object %>
   <% end %>
+  <%= form_with model: @order, local:true, url: {action: 'confirm'} do |f| %>
   <div class="row">
     <div class="form-group">
-      <%= form_with model: @order, local:true, url: {action: 'confirm'} do |f| %>
       <table>
           <tr><th>支払方法</th></tr>
           <tr>
@@ -36,23 +36,25 @@
               〒<%= current_customer.postal_code %> <%=current_customer.address %>
             </td>
           </tr>
-          <tr>
-            <td>
-              <%= current_customer.name %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-                <!--渡す値間違ってると思う-->
-              <%= f.radio_button :address_option, 1 %>
-              <%= f.label :address_option, '登録済住所から選択' %>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <%= f.collection_select(:shipping_address_id, current_customer.shipping_addresses, :id, :full_address) %>
-            </td>
-          </tr>
+          <% if current_customer.shipping_addresses.present? %>
+            <tr>
+              <td>
+                <%= current_customer.name %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                  <!--渡す値間違ってると思う-->
+                <%= f.radio_button :address_option, 1 %>
+                <%= f.label :address_option, '登録済住所から選択' %>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <%= f.collection_select(:shipping_address_id, current_customer.shipping_addresses, :id, :full_address) %>
+              </td>
+            </tr>
+          <% end %>
           <tr>
             <td>
                 <!--値変更-->

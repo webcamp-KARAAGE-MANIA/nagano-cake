@@ -19,21 +19,21 @@
           <tr>
           <td><%= customer.id %></td>
           <td><%= link_to admin_customer_path(customer.id) do %>
-              <%= customer.name %>
+              <%= customer.surname %> <%= customer.name %>
               <% end %></td>
           <td><%= customer.email %></td>
           <td>
             <% if customer.is_delete == false %>
             <p class="text-success">有効</p>
             <% else %>
-            <p>無効</p></td>
+            <p>退会</p></td>
             <% end %>
           </tr>
           <% end %>
           <% end %>
         </tbody>
       </table>
-      <div class="text-center"><%= paginate @customers%></div>
+      <div class="text-center pb-5"><%= paginate @customers%></div>
       </div>
     </div>
   </div>

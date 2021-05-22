@@ -1,34 +1,12 @@
 class OrdersController < ApplicationController
   def index
-    @orders = current_customer.orders
+    @orders = current_customer.orders.page(params[:page]).per(10)
   end
 
   def new
     @order = Order.new
     @order.customer_id = current_customer.id
   end
-
-  # def confirm
-  #   if params[:order][:address_option] == 0
-  #     @order.shipping_address = current_customer.address
-  #     @order.postal_code = current_customer.postal_code
-  #     @order.attention = current_customer.surname + current_customer.name
-  #   end
-  #   @order = Order.new(order_params)
-  #   @order.customer_id = current_customer.id
-  #   render :new if @order.invalid?
-  #   @cart_items = current_customer.cart_items.all
-  #     @cart_items.each do |cart_item|
-  #       @order_details = @order.order_details.new
-  #       @order_details.product_id = cart_item.product_id
-  #       @order_details.quantity = cart_item.quantity
-  #       @order_details.save
-  #       @order.shipping_fee = 800
-  #       @order.total_amount = cart_item.subtotal_price
-  #       @order.total_amount += @order.shipping_fee
-  #       current_customer.cart_items.destroy_all
-  #     end
-  # end
 
   def confirm
     @order = Order.new(order_params)

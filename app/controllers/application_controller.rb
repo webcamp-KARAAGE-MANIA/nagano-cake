@@ -12,7 +12,16 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_out_path_for(resource)
-    root_path # ログアウト後に遷移するpathを設定
+    case resource
+    when :admin
+      admin_session_path # ログアウト後に遷移するpathを設定
+    when :customer
+      root_path
+    end
+  end
+
+  def search
+    @articles = Article.search(params[:qkeyword])
   end
 
   protected

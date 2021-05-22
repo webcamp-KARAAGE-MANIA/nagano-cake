@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     resources :orders, only: [:index, :show, :update]
     resources :products, only: [:new, :create, :index, :show, :edit, :update]
     resources :customers, only: [:index, :show, :edit, :update,]
+    get '/search', to: 'searchs#search'
   end
 
   resources :products, only: [:index, :show]
@@ -48,7 +49,7 @@ Rails.application.routes.draw do
       patch 'hide'
       get 'confirm'
     end
-
   end
+
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
