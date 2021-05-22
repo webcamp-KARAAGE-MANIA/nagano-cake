@@ -1,54 +1,55 @@
 <div class="container">
-  <div class="row">
-    <div class="bg-light pl-4 pr-4 text-center">
-      <h5 class="lh-auto text-center">配送先登録/一覧</h5>
-    </div>
-  </div>
+  <h5 class="ml-4 my-4 bg-light d-inline-flex">配送先登録/一覧</h5>
   <%= form_for(@shipping_address) do |f| %>
     <%= render 'layouts/errors', object: f.object %>
   <% end %>
-  <div class="row mt-4">
-    <div class="form-group col-md-10">
-      <%= form_with model: @shipping_address, local:true do |f| %>
-        <%= f.label :postal_code, '郵便番号(ハイフンなし)', class:"col-4" %>
-        <%= f.text_field :postal_code, placeholder: "0000000", class:'col-3' %><br>
-        <%= f.label :address, '住所', class:"col-4" %>
-        <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class:'col-6' %><br>
-        <%= f.label :attention, '宛名', class:"col-4" %>
-        <%= f.text_field :attention, placeholder: "唐揚マニオ", class:'col-3' %>
-        <%= f.submit '新規登録', class:'btn btn-success xs-2 float-right' %>
-      <% end %>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="row mt-4">
+        <div class="form-group col-md-10">
+          <%= form_with model: @shipping_address, local:true do |f| %>
+            <%= f.label :postal_code, '郵便番号(ハイフンなし)', class:"col-4" %>
+            <%= f.text_field :postal_code, placeholder: "0000000", class:'col-3' %><br>
+            <%= f.label :address, '住所', class:"col-4" %>
+            <%= f.text_field :address, placeholder: "東京都渋谷区代々木神園町0-0", class:'col-6' %><br>
+            <%= f.label :attention, '宛名', class:"col-4" %>
+            <%= f.text_field :attention, placeholder: "唐揚マニオ", class:'col-3' %>
+            <%= f.submit '新規登録', class:'btn btn-success xs-2 float-right' %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <table class="table table-hover table-bordered border-dark">
+          <thead class="table-secondary">
+            <tr>
+              <td>郵便番号</td>
+              <td>住所</td>
+              <td>宛名</td>
+              <td colspan="1"></td>
+            </tr>
+          </thead>
+          <tbody>
+            <% if @shipping_addresses.present? %>
+              <% @shipping_addresses.each do |shipping_address| %>
+                <tr>
+                  <td><%= shipping_address.postal_code %></td>
+                  <td><%= shipping_address.address %></td>
+                  <td><%= shipping_address.attention %></td>
+                  <td>
+                    <%= link_to "編集する", edit_shipping_address_path(shipping_address.id), class:'btn btn-success' %>
+                    <%= link_to "削除する", shipping_address_path(shipping_address.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class:'btn btn-danger' %>
+                  </td>
+                </tr>
+              <% end %>
+            <% else %>
+            <tr>
+              <td colspan="4">配送先が登録されていません。</td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  <div class="row">
-    <table class="table table-hover table-bordered border-dark">
-      <thead class="bg-light">
-        <tr>
-          <td>郵便番号</td>
-          <td>住所</td>
-          <td>宛名</td>
-          <td colspan="1"></td>
-        </tr>
-      </thead>
-      <tbody>
-        <% if @shipping_addresses.present? %>
-          <% @shipping_addresses.each do |shipping_address| %>
-            <tr>
-              <td><%= shipping_address.postal_code %></td>
-              <td><%= shipping_address.address %></td>
-              <td><%= shipping_address.attention %></td>
-              <td>
-                <%= link_to "編集する", edit_shipping_address_path(shipping_address.id), class:'btn btn-success' %>
-                <%= link_to "削除する", shipping_address_path(shipping_address.id), method: :delete, data: { confirm: '本当に削除しますか？' }, class:'btn btn-danger' %>
-              </td>
-            </tr>
-          <% end %>
-        <% else %>
-        <tr>
-          <td colspan="4">配送先が登録されていません。</td>
-        </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+</div>
 </div>

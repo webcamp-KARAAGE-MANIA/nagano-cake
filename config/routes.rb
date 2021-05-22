@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get 'cards/new'
   get 'search/search'
   devise_for :admins, controllers: {
     sessions:      'admins/sessions',
@@ -29,7 +30,10 @@ Rails.application.routes.draw do
     get '/search', to: 'searchs#search'
   end
 
-  resources :products, only: [:index, :show]
+  resources :products, only: [:index, :show] do
+    resources :favorites, only: [:create, :destroy, :index]
+  end
+
   resources :cart_items do
     collection do
     delete 'destroy_all'
@@ -43,6 +47,14 @@ Rails.application.routes.draw do
     end
   end
   resources :shipping_addresses, only: [:new, :create, :index, :edit, :update, :destroy]
+
+  resources :cards, only: [:new, :show] do
+    collection do
+      post 'show', to: 'card#show'
+      post 'pay', to: 'card#pay'
+      post 'delete', to: 'card#delete'
+    end
+  end
 
   resources :customers, only: [:show, :edit, :update] do
     member do

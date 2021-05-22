@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :genre
   has_many :cart_items, dependent: :destroy
   has_many :order_details, dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   attachment :image
 
@@ -14,6 +15,11 @@ class Product < ApplicationRecord
     (self.price * 1.10).round
   end
 
+
+  def favorited_by?(customer)
+    favorites.where(customer_id: customer.id).exists?
+  end
+    
   def self.search(search, word)
     if search == 'perfect'
       Customer.where(name: word)

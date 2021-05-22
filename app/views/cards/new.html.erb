@@ -1,0 +1,46 @@
+<div class="container">
+  <div class="row">
+    <div class="bg-light pl-4 pr-4 text-center">
+      <h5 class="lh-auto text-center">クレジットカード登録</h5>
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <%= form_with url: cards_path, id: "card_form", local: true do |f| %>
+      <div>
+        <%= f.label :number, "カード番号" %>
+        <%= f.text_field :number %>
+      </div>
+      <div>
+        <%= f.label :name, "カード名義人" %>
+        <%= f.text_field :name %>
+      </div>
+      <div>
+        <%= f.label :cvc, "セキュリティコード" %>
+        <%= f.text_field :cvc %>
+      </div>
+      <div>
+        <%= f.label :exp_month, "有効期限（月）" %>
+        <%= f.text_field :exp_month %>
+      </div>
+      <div>
+        <%= f.label :exp_year, "有効期限（年）" %>
+        <%= f.text_field :exp_year %>
+      </div>
+      <div>
+        <div class="row d-flex justify-content-center">
+          <%= f.submit "送信", class:'btn btn-primary' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<script
+  type="text/javascript"
+  src="https://checkout.pay.jp/"
+  class="payjp-button"
+  data-key="#{ENV['PAYJP_PUBLIC_KEY']}"
+  data-submit-text="購入する"
+  data-text="カードを入力"
+>
+</script>
