@@ -1,4 +1,5 @@
 class SearchController < ApplicationController
+
   def search
     @value = params["search"]["value"]         #データを代入
     @how = params["search"]["how"]             #データを代入
