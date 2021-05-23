@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   def index
-    @orders = current_customer.orders
+    @orders = current_customer.orders.page(params[:page]).per(8)
   end
 
   def new
@@ -81,7 +81,8 @@ class OrdersController < ApplicationController
   end
 
   def complete
-
+    @products = Product.all
+    @order = Order.last(1)
   end
 
   # def subtotal_price
