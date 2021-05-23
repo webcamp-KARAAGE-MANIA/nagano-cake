@@ -14,6 +14,10 @@ class ProductsController < ApplicationController
     @cart_item = CartItem.new
   end
 
+   def bookmarks
+     @favorite_products = current_customer.favorite_products.order(created_at: :desc).page(params[:page]).per(10)
+   end
+
   def product_params
     params.require(:product).permit(:name, :introduction, :genre_id, :price, :image, :is_active)
   end

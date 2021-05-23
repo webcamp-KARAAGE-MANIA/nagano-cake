@@ -1,9 +1,9 @@
 <% if product.favorited_by?(current_customer) %>
-  <%= link_to product_favorite_path(product), method: :delete do %>
+  <%= link_to product_favorite_path(product), method: :delete, remote: true do %>
     <i class="fas fa-star fa-lg favorite-color"></i>
   <% end %>
 <% else %>
-  <%= link_to product_favorites_path(product), method: :post do %>
+  <%= link_to product_favorites_path(product), method: :post, remote: true do %>
     <i class="far fa-star fa-lg favorite-color"></i>
   <% end %>
 <% end %>

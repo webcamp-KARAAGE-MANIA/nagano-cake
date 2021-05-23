@@ -6,6 +6,7 @@ class Customer < ApplicationRecord
   has_many :orders, dependent: :destroy
   has_one :card, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_products, through: :favorites, source: :product
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
