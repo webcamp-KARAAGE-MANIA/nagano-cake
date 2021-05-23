@@ -1,7 +1,4 @@
 class FavoritesController < ApplicationController
-  def index
-    @products = current_customer.favorites.products
-  end
 
   def create
     @product = Product.find(params[:product_id])

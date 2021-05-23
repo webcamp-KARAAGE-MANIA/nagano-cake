@@ -31,7 +31,10 @@ Rails.application.routes.draw do
   end
 
   resources :products, only: [:index, :show] do
-    resources :favorites, only: [:create, :destroy, :index]
+    resources :favorites, only: [:create, :destroy]
+    collection do
+      get :bookmarks
+    end
   end
 
   resources :cart_items do
