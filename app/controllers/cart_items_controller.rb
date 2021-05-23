@@ -20,7 +20,8 @@ class CartItemsController < ApplicationController
      end
     end
        if @cart_item.save
-        redirect_to cart_items_path, notice: 'カートに商品が追加されました'
+          #OrderMailer.order_email(current_customer).deliver
+          redirect_to cart_items_path, notice: 'カートに商品が追加されました'
        else
         @product = Product.find_by(id: @cart_item.product_id)
         redirect_to cart_items_path
