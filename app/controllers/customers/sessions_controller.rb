@@ -5,12 +5,12 @@ class Customers::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   # def new
-  #   super
+  #   super OrderMailer.with(customer: @customer).order_email.deliver_later
   # end
 
   # POST /resource/sign_in
   # def create
-  #   super
+  #   super OrderMailer.with(customer: @customer).order_email.deliver_later
   # end
 
   # DELETE /resource/sign_out

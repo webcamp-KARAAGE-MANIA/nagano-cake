@@ -15,6 +15,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   # def create
   #   super
+  #   OrderMailer.order_email(current_customer).deliver
   # end
 
   # GET /resource/edit

@@ -23,7 +23,7 @@ class CartItemsController < ApplicationController
         redirect_to cart_items_path, notice: 'カートに商品が追加されました'
        else
         @product = Product.find_by(id: @cart_item.product_id)
-        redirect_to product_path(@product)
+        redirect_to cart_items_path
        end
     end
 
