@@ -1,7 +1,7 @@
 <header class="sticky-top">
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container">
-      <a class="navbar-brand" href="/"><span><%= image_tag 'nagano-cake-logo.png', :size =>'110x50' %></span>
+      <a class="navbar-brand" href="/"><span><%= image_tag 'nagano-cake-logo-removebg.png', :size =>'140x70' %></span>
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -20,6 +20,7 @@
           <li><%= link_to "マイページ", customer_path(current_customer),class: 'nav-link text-drak fas fa-user-circle' %></li>
           <li><%= link_to ' ログアウト', destroy_customer_session_path, method: :delete,class: 'nav-link text-drak fas fa-sign-out-alt' %></li>
           <li><%= link_to ' 商品一覧', products_path,class: 'nav-link text-drak fas fa-birthday-cake' %></li>
+          <li><%= link_to ' お気に入り', bookmarks_products_path,class: 'nav-link text-drak fas fa-star' %></li>
           <li><%= link_to ' カート', cart_items_path,class: 'nav-link text-drak fas fa-shopping-cart' %></li>
         <% else %>
         　<li><%= link_to ' 管理者ログイン', new_admin_session_path ,class: 'nav-link text-drak fas fa-user-lock'%></li>
