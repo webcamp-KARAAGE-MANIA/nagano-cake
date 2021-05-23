@@ -3,6 +3,7 @@ class Product < ApplicationRecord
   has_many :cart_items, dependent: :destroy
   has_many :order_details, dependent: :destroy
   has_many :favorites, dependent: :destroy
+  has_many :favorite_products, through: :favorites, source: :board
 
   attachment :image
 
@@ -19,7 +20,7 @@ class Product < ApplicationRecord
   def favorited_by?(customer)
     favorites.where(customer_id: customer.id).exists?
   end
-    
+
   def self.search(search, word)
     if search == 'perfect'
       Customer.where(name: word)
@@ -30,6 +31,10 @@ class Product < ApplicationRecord
     else
       Customer.where('name LIKE ?', '%' + word + '%')
     end
+  end
+
+  def favorite_by?(customer)
+    favorites.where(customer_id: customer.id).exists?
   end
 
 end
