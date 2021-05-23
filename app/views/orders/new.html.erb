@@ -39,6 +39,7 @@
                 <%= current_customer.name %>
               </td>
             </tr>
+            <% if current_customer.shipping_addresses.present? %>
             <tr>
               <td>
                 <%= f.radio_button :address_option, 1 %>
@@ -50,6 +51,7 @@
                 <%= f.collection_select(:shipping_address_id, current_customer.shipping_addresses, :id, :full_address) %>
               </td>
             </tr>
+            <% end %>
             <tr>
               <td>
                 <%= f.radio_button :address_option, 2 %>
