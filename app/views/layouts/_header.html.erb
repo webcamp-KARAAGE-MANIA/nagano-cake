@@ -18,6 +18,7 @@
           <%= render 'layouts/search' %>
         <% elsif customer_signed_in? %>
           <li><%= link_to "マイページ", customer_path(current_customer),class: 'nav-link text-drak fas fa-user-circle' %></li>
+          <li><%= link_to ' About', homes_about_path ,class: 'nav-link text-drak fas fa-store-alt' %></li>
           <li><%= link_to ' ログアウト', destroy_customer_session_path, method: :delete,class: 'nav-link text-drak fas fa-sign-out-alt' %></li>
           <li><%= link_to ' 商品一覧', products_path,class: 'nav-link text-drak fas fa-birthday-cake' %></li>
           <li><%= link_to ' お気に入り', bookmarks_products_path,class: 'nav-link text-drak fas fa-star' %></li>
