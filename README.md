@@ -14,17 +14,17 @@ ___
 * ECサイトに必要なカート、お気に入り機能実装
 * 配送先は複数から選べて、支払方法はクレジットカード・銀行振込に対応
 
-#設計
+# 設計
 
 ## ER図
 <img width="947" alt="スクリーンショット 2021-05-24 11 00 16" src="https://user-images.githubusercontent.com/79149947/119286770-16d7a880-bc80-11eb-8998-4f0f6c9b45c4.png">
 
 ## アプリケーション詳細設計
 
-管理者
+管理者  
 <img width="558" alt="スクリーンショット 2021-05-24 11 02 30" src="https://user-images.githubusercontent.com/79149947/119286976-7a61d600-bc80-11eb-809a-3cc372b6070c.png">
 
-会員
+会員  
 <img width="558" alt="スクリーンショット 2021-05-24 11 03 35" src="https://user-images.githubusercontent.com/79149947/119287012-91a0c380-bc80-11eb-829d-a41602785ebb.png">
 
 ## テーブル定義書
