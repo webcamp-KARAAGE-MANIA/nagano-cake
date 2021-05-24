@@ -35,15 +35,9 @@ class Customer < ApplicationRecord
     super && (self.is_delete == false)
   end
 
-  def self.search(search, word)
-    if search == 'perfect'
-      Customer.where(name: word)
-    elsif search == 'forward'
-      Customer.where('name LIKE ?', word + '%')
-    elsif search == 'backward'
-      Customer.where('name LIKE ?', '%' + word)
-    else
-      Customer.where('name LIKE ?', '%' + word + '%')
+  def self.customer_search(search)
+    if search
+      Customer.where('surname LIKE ?', '%' + search + '%')
     end
   end
 

@@ -8,13 +8,12 @@ class OrderDetail < ApplicationRecord
     product.add_tax_price * quantity.round
   end
 
-  # order_status変更
+  # order_statusの変更
   def change_order_status
     if self.product_status == "製作中"
       self.order.update(order_status: :制作中)
-    elsif self.product_status == "制作完了"
-      self.order.update(order_status: :発送済み)
+    elsif OrderDetail.where(order_id: self.order_id).pluck(:product_status).all?{ |product_status| product_status == "制作完了" }
+      self.order.update(order_status: :発送準備中)
     end
   end
-
 end

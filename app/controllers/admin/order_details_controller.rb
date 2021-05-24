@@ -1,5 +1,7 @@
 class Admin::OrderDetailsController < ApplicationController
 
+  before_action :authenticate_admin!
+
   def create
     @order_detail = OrderDetail.find(params[:order_detail])
   end

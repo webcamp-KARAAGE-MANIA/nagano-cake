@@ -1,14 +1,9 @@
 class Admin::SearchsController < ApplicationController
-  def search
-    @range = params[:range]
-    search = params[:search]
-    @word = params[:word]
 
-    if @range == 'customer'
-       @customer = Customer.search(search,@word)
-    else
-       @product = Product.search(search,@word)
-    end
+  def search
+    @search = params[:search]
+    @customers = Customer.customer_search(params[:search]).page(params[:page]).per(9)
+    @products = Product.product_search(params[:search]).page(params[:page]).per(9)
   end
 
 end

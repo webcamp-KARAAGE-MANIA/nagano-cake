@@ -21,20 +21,13 @@ class Product < ApplicationRecord
     favorites.where(customer_id: customer.id).exists?
   end
 
-  def self.search(search, word)
-    if search == 'perfect'
-      Customer.where(name: word)
-    elsif search == 'forward'
-      Customer.where('name LIKE ?', word + '%')
-    elsif search == 'backward'
-      Customer.where('name LIKE ?', '%' + word)
-    else
-      Customer.where('name LIKE ?', '%' + word + '%')
-    end
-  end
-
   def favorite_by?(customer)
     favorites.where(customer_id: customer.id).exists?
   end
 
+  def self.product_search(search)
+    if search
+      Product.where('name LIKE ?', '%' + search + '%')
+    end
+  end
 end
