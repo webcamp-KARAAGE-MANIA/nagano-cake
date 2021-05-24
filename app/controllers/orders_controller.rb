@@ -8,33 +8,9 @@ class OrdersController < ApplicationController
     @order.customer_id = current_customer.id
   end
 
-  # def confirm
-  #   if params[:order][:address_option] == 0
-  #     @order.shipping_address = current_customer.address
-  #     @order.postal_code = current_customer.postal_code
-  #     @order.attention = current_customer.surname + current_customer.name
-  #   end
-  #   @order = Order.new(order_params)
-  #   @order.customer_id = current_customer.id
-  #   render :new if @order.invalid?
-  #   @cart_items = current_customer.cart_items.all
-  #     @cart_items.each do |cart_item|
-  #       @order_details = @order.order_details.new
-  #       @order_details.product_id = cart_item.product_id
-  #       @order_details.quantity = cart_item.quantity
-  #       @order_details.save
-  #       @order.shipping_fee = 800
-  #       @order.total_amount = cart_item.subtotal_price
-  #       @order.total_amount += @order.shipping_fee
-  #       current_customer.cart_items.destroy_all
-  #     end
-  # end
-
   def confirm
     @order = Order.new(order_params)
-
     @order.customer_id = current_customer.id
-    # render :new if @order.invalid?
     if params[:order][:address_option] == "0"
       @order.shipping_address = current_customer.address
       @order.postal_code = current_customer.postal_code
@@ -49,7 +25,6 @@ class OrdersController < ApplicationController
     @total_price = @cart_items.sum{|c| c.product.add_tax_price * c.quantity }
     @order.shipping_fee = 800
     @order.total_amount = @order.shipping_fee + @total_price
-
   end
 
   def create
@@ -70,6 +45,19 @@ class OrdersController < ApplicationController
     @order.total_amount = @order.shipping_fee + @total_price
     OrderMailer.order_email(current_customer).deliver
     redirect_to complete_orders_path, notice: '注文を承りました！'
+      @cart_items = current_customer.cart_items.all
+      @cart_items.each do |cart_item|
+        @order_details = @order.order_details.new
+        @order_details.product_id = cart_item.product_id
+        @order_details.quantity = cart_item.quantity
+        @order_details.save
+        current_customer.cart_items.destroy_all
+      end
+      @order.shipping_fee = 800
+      @total_price = @cart_items.sum{|c| c.product.add_tax_price * c.quantity }
+      @order.total_amount = @order.shipping_fee + @total_price
+      OrderMailer.order_email(current_customer).deliver
+      redirect_to complete_orders_path, notice: '注文を承りました！'
     else
       render :new
     end
@@ -84,10 +72,6 @@ class OrdersController < ApplicationController
     @products = Product.all
     @order = Order.last(1)
   end
-
-  # def subtotal_price
-  #   product.add_tax_price.to_i * quantity.to_i
-  # end
 
   private
   def order_params

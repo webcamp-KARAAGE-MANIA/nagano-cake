@@ -42,7 +42,6 @@
                 <th class="table-secondary">請求金額</th>
                 <td>¥<%= @order.total_amount.to_s(:delimited) %></td>
                 <%= f.hidden_field :total_amount, :value => @order.total_amount %>
-
               </tr>
             </table>
           </div>
