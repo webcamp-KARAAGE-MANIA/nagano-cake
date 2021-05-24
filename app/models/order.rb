@@ -14,7 +14,7 @@ class Order < ApplicationRecord
   def order_product_total
     total_amount - shipping_fee.round
   end
-  
+
   # product_status変更
   def change_order_details_status
     if self.order_status == "入金待ち"
