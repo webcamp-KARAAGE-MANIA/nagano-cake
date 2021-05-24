@@ -16,6 +16,7 @@ class Order < ApplicationRecord
   end
 
   # product_statusの変更
+
   def change_order_details_status
     if self.order_status == "入金待ち"
       self.order_details.update(product_status: :着手不可)

@@ -88,7 +88,7 @@
   <% if customer_signed_in? %>
       <%= link_to "注文履歴一覧へ戻る", customers_orders_path, class: "btn btn-info btn-lg order-index-back btn-sm" %>
     <% else %>
-      <%= link_to "会員詳細へ戻る", admin_customer_path, class: "btn btn-info order-index-back btn-sm" %>
+      <%= link_to "会員詳細へ戻る", admin_customer_path(@order.customer_id), class: "btn btn-info order-index-back btn-sm" %>
     <% end %>
   <% else %>
     <p>注文履歴がありません。</p>

@@ -40,4 +40,5 @@ class Customer < ApplicationRecord
       Customer.where('surname LIKE ?', '%' + search + '%')
     end
   end
+
 end
