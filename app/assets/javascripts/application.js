@@ -27,7 +27,6 @@
 //= require_tree .
 
 /*global $*/
-
   $("#theTarget").skippr({
     // スライドショーの変化 ("fade" or "slide")
     transition : 'slide',
@@ -51,3 +50,11 @@
     hidePrevious : false
   });
 
+  $(function(){
+  $('.image-photo').mouseover(function(){
+    $('.this').addClass('box1-ext');
+  });
+  $('.image-photo').mouseout(function(){
+    $('.this').removeClass('box1-ext');
+  });
+});
