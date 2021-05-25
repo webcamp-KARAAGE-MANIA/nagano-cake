@@ -1,9 +1,9 @@
 <% if product.favorited_by?(current_customer) %>
-  <%= link_to product_favorite_path(product), method: :delete, remote: true do %>
-    <i class="fas fa-star fa-lg favorite-color"></i>
+  <%= link_to product_favorite_path(product), method: :delete, remote: true, class:'btn btn-warning' do %>
+    <i class="fas fa-star">お気に入りから削除</i>
   <% end %>
 <% else %>
-  <%= link_to product_favorites_path(product), method: :post, remote: true do %>
-    <i class="far fa-star fa-lg favorite-color"></i>
+  <%= link_to product_favorites_path(product), method: :post, remote: true, class:'btn btn-warning' do %>
+    <i class="far fa-star">お気に入りに追加</i>
   <% end %>
 <% end %>
