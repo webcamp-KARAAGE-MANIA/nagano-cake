@@ -13,3 +13,73 @@
  *= require_tree .
  *= require_self
  */
+@import "bootstrap";
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+#notice {
+  color: green;
+}
+
+body {
+font-family: 'HanziPen SC' ;
+}
+
+.cart{
+  background-color: #F3EBF6;
+  height: 100%;
+  width: 100%;
+}
+.application {
+  margin:0px;
+  padding:0px;
+}
+
+body {
+  background-color: #f5f2eb;
+  color: #592e15;
+}
+
+main {
+  color: #592e15;
+}
+
+/* Header */
+
+header {
+  font-size: 15px;
+  background-color: #eee9dd;
+  color: #592e15;
+}
+
+
+/* Footer */
+
+footer {
+  color: #592e15;
+  background-color: #eee9dd;
+}
+
+.genre{
+  margin-left: 20px;
+}
+
+.cart_top{
+  margin-left: 150px;
+}
+
+.navbar {
+  padding: 0px;
+}
+
+.navbar-brand {
+ padding: 0px;
+}
+
+.yoko {
+  display: flex;
+}
+
+.favorite-color {
+  color:red;
+}

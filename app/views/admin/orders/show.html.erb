@@ -1,0 +1,96 @@
+<div class="container">
+  <% if @order.present? %>
+  <div class="row mt-5">
+    <div class="ml-4 my-4 bg-light d-inline-flex mt-5"><h5>注文履歴詳細</h5></div>
+  </div>
+  <div class="row  mt-2">
+    <div class="col-md-12 text-left w-auto mx-auto">
+      <table>
+        <tr>
+          <th>購入者</th>
+          <td><%= link_to @order.customer.surname + ' ' + @order.customer.name, admin_customer_path(@order.id) %></td>
+        </tr>
+        <tr>
+          <th>注文日</th>
+          <td><%= @order.created_at.strftime("%Y/%m/%d") %></td>
+        </tr>
+        <tr>
+          <th>配送先</th>
+          <td>〒<%= @order.postal_code %> <%=@order.shipping_address %><br>
+            <div class="text-left"><%= @order.customer.surname + ' ' + @order.customer.name %></div>
+          </td>
+        </tr>
+        <tr>
+          <th>支払い方法</th>
+          <td><%= @order.payment_method %></td>
+        </tr>
+        <tr>
+          <th>注文ステータス</th>
+          <td>
+            <%= form_with model:@order, url:admin_order_path, method: :patch, local:true do |f| %>
+            <%= f.select :order_status, Order.order_statuses.keys.to_a %>
+            <%= f.submit "更新", class:"btn btn-success btn-sm" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="col-mt-8 text-left">
+      <table class="table table-stripped">
+        <thead>
+          <tr class="order-info">
+            <th>商品名</th>
+            <th>単価（税込）</th>
+            <th>数量</th>
+            <th>小計</th>
+            <th>制作ステータス</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @order_details.each do |order_detail| %>
+          <tr>
+            <td><%= order_detail.product.name %></td>
+            <td>¥<%= (order_detail.product.price*1.1).floor.to_s(:delimited) %></td>
+            <td><%= order_detail.quantity %></td>
+            <td>¥<%= (order_detail.product.price*order_detail.quantity*1.1).floor.to_s(:delimited) %></td>
+            <td><%= form_with model:order_detail, url:admin_order_detail_path(order_detail), method: :patch, local:true do |f|%>
+                <%= f.select :product_status, OrderDetail.product_statuses.keys.to_a %>
+                <%= f.submit "更新", class:"btn btn-success btn-sm" %>
+                <% end %>
+            </td>
+            <td><%= %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-md-4">
+      <div class="float-right">
+        <table>
+          <tr>
+            <th width="120">商品合計</th>
+            <td align="right">¥<%= (@order.total_amount*1.1).floor.to_s(:delimited)%></td>
+          </tr>
+          <tr>
+            <th width="120">送料</th>
+            <td align="right">¥<%= (@order.shipping_fee).floor.to_s(:delimited) %></td>
+          </tr>
+          <tr>
+            <th width="120">請求金額合計</th>
+            <td align="right">¥<%= (@order.total_amount*1.1 + @order.shipping_fee).floor.to_s(:delimited)%></td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <% if customer_signed_in? %>
+      <%= link_to "注文履歴一覧へ戻る", customers_orders_path, class: "btn btn-info btn-lg order-index-back btn-sm" %>
+    <% else %>
+      <%= link_to "会員詳細へ戻る", admin_customer_path(@order.customer_id), class: "btn btn-info order-index-back btn-sm" %>
+    <% end %>
+  <% else %>
+    <p>注文履歴がありません。</p>
+  <% end %>
+</div>
