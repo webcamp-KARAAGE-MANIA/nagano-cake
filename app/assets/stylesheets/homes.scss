@@ -62,3 +62,19 @@
 .text-color{
     color: #fff; /* 文字色を白に変更 */
 }
+
+// JS記載
+
+.image-photo{
+  width: 150px;
+  height: 150px;
+  transition-duration: 1.0s;
+  width: 67%;
+  cursor: pointer;
+}
+
+.image-photo:hover{
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.5);
+  transform: translateY(-10px);
+  transition-duration: 0.5s;
+}
