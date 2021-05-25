@@ -43,7 +43,7 @@ class OrdersController < ApplicationController
       @order.shipping_fee = 800
       @total_price = @cart_items.sum{|c| c.product.add_tax_price * c.quantity }
       @order.total_amount = @order.shipping_fee + @total_price
-      # OrderMailer.order_email(current_customer).deliver
+      OrderMailer.order_email(current_customer).deliver
       redirect_to complete_orders_path, notice: '注文を承りました！'
     else
       render :new
