@@ -14,9 +14,8 @@ class Order < ApplicationRecord
   def order_product_total
     total_amount - shipping_fee.round
   end
-
-  # product_statusの変更
-
+  
+  # product_status変更
   def change_order_details_status
     if self.order_status == "入金待ち"
       self.order_details.update(product_status: :着手不可)
@@ -24,6 +23,7 @@ class Order < ApplicationRecord
       self.order_details.update(product_status: :制作待ち)
     end
   end
+
 
   def full_address
     self.postal_code + " " + self.address + " " + self.attention
