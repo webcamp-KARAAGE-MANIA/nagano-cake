@@ -5,7 +5,6 @@ class CartItemsController < ApplicationController
     def index
         @cart_items = current_customer.cart_items
         @total_price = @cart_items.sum{|c| c.product.add_tax_price * c.quantity }
-        #@total = @cart_items.product.sum(:add_tax_price)
     end
 
     def create
@@ -20,11 +19,10 @@ class CartItemsController < ApplicationController
      end
     end
        if @cart_item.save
-          #OrderMailer.order_email(current_customer).deliver
           redirect_to cart_items_path, notice: 'カートに商品が追加されました'
        else
         @product = Product.find_by(id: @cart_item.product_id)
-        redirect_to cart_items_path
+        redirect_to product_path(params[:cart_item][:product_id]), notice: '数量を選択してください'
        end
     end
 

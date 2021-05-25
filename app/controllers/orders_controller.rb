@@ -32,6 +32,7 @@ class OrdersController < ApplicationController
     @order.customer_id = current_customer.id
     @order.shipping_fee = 800
     if @order.save
+<<<<<<< HEAD
     @cart_items = current_customer.cart_items.all
     @cart_items.each do |cart_item|
       @order_details = @order.order_details.new
@@ -45,6 +46,8 @@ class OrdersController < ApplicationController
     @order.total_amount = @order.shipping_fee + @total_price
     OrderMailer.order_email(current_customer).deliver
     redirect_to complete_orders_path, notice: '注文を承りました！'
+=======
+>>>>>>> develop
       @cart_items = current_customer.cart_items.all
       @cart_items.each do |cart_item|
         @order_details = @order.order_details.new
@@ -56,7 +59,11 @@ class OrdersController < ApplicationController
       @order.shipping_fee = 800
       @total_price = @cart_items.sum{|c| c.product.add_tax_price * c.quantity }
       @order.total_amount = @order.shipping_fee + @total_price
+<<<<<<< HEAD
       OrderMailer.order_email(current_customer).deliver
+=======
+      #OrderMailer.order_email(current_customer).deliver
+>>>>>>> develop
       redirect_to complete_orders_path, notice: '注文を承りました！'
     else
       render :new
